@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Configuration" type="Configuration"/>
+	<xs:complexType name="Configuration">
+		<xs:sequence>
+			<xs:element name="Item" type="Item" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Expression" type="Expression" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="optional" type="xs:string"/>
+		<xs:attribute name="formType" use="required" type="FormType"/>
+		<xs:attribute name="min" use="optional" type="xs:int"/>
+		<xs:attribute name="max" use="optional" type="xs:int"/>
+		<xs:attribute name="path" use="optional" type="xs:string"/>
+		<xs:attribute name="uri" use="optional" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="Item" type="Item"/>
+	<xs:complexType name="Item">
+		<xs:sequence>
+			<xs:element name="Configuration" type="Configuration" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="key" use="optional" type="xs:string"/>
+		<xs:attribute name="value" use="required" type="xs:string"/>
+	</xs:complexType>
+	<xs:simpleType name="FormType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="select"/>
+			<xs:enumeration value="bool"/>
+			<xs:enumeration value="text"/>
+			<xs:enumeration value="integer"/>
+			<xs:enumeration value="float"/>
+			<xs:enumeration value="hex_integer"/>
+			<xs:enumeration value="expression"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ConfigurationSet" type="ConfigurationSet"/>
+	<xs:complexType name="ConfigurationSet">
+		<xs:sequence>
+			<xs:element name="Configuration" type="Configuration" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element name="DefineSet" type="DefineSet" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ConfigurationSet" type="ConfigurationSet" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="Expression" type="Expression"/>
+	<xs:complexType name="Expression">
+		<xs:sequence>
+			<xs:element name="description" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Exp" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DefineSet" type="DefineSet"/>
+	<xs:complexType name="DefineSet">
+		<xs:sequence>
+			<xs:element name="Def" type="Def" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Def" type="Def"/>
+	<xs:complexType name="Def">
+		<xs:sequence/>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="path" use="required" type="xs:string"/>
+		<xs:attribute name="uri" use="required" type="xs:string"/>
+	</xs:complexType>
+</xs:schema>

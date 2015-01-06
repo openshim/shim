@@ -4,7 +4,7 @@ shim is a github public repository for the Multicore Association SHIM specificat
 
 # Directories
 
-[tools](https://github.com/masakigondo/shim/tree/master/tools) directory includes pre-built executables for forementioned tools. You can just download these and try them. For SHIM Editor, [a simple user manual] is provided (https://github.com/masakigondo/shim/tree/master/tools/shim-editor/docs).
+[tools](https://github.com/masakigondo/shim/tree/master/tools) directory includes pre-built executables for forementioned tools. You can just download these and try them. For SHIM Editor, [a simple user manual](https://github.com/masakigondo/shim/tree/master/tools/shim-editor/docs) is provided.
 
 [samples](https://github.com/masakigondo/shim/tree/master/samples) direcotry includes various SHIM and CCF XML files samples. Please note that these are just samples to provide a feel for how these XML files look like. The accuracy and correctness of the contents are not verified.
 

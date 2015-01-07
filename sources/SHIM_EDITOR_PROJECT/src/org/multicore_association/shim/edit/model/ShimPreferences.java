@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
@@ -17,8 +19,8 @@ import org.multicore_association.shim.edit.model.preferences.PerformancePreferen
 import org.multicore_association.shim.edit.model.preferences.SavePolicyPreferences;
 import org.multicore_association.shim.edit.model.preferences.ShimPreferencesKey;
 import org.multicore_association.shim.edit.model.preferences.ShimPreferencesStore;
-import org.multicore_association.shim.edit.model.preferences.SlaveComponentPreferences;
 import org.multicore_association.shim.edit.model.preferences.ShimPreferencesStore.CacheTypeSelect;
+import org.multicore_association.shim.edit.model.preferences.SlaveComponentPreferences;
 
 /**
  * Preferences to create SHIM Data obejct's instance.

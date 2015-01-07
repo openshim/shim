@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
@@ -7,17 +9,83 @@ package org.multicore_association.shim.edit.actions;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jface.wizard.IWizardPage;
 import org.multicore_association.shim.edit.model.ShimModelManager;
 
 /**
- * SHIM Editor Clipboard to copy and paste items.
+ * SHIM Editor Clipboard to copy and paste items.<br>
+ * While every wizard runs, the effective range of the clipboard becomes only the page of the wizard.
  */
 public class MyClipboard {
-	private static boolean multiSelectFlg = false;
+	
+	
+	/**
+	 * SHIM Editor Clipboard to copy and paste items.
+	 */
+	private static class ClipboardImpl {
+		private boolean multiSelectFlg = false;
 
-	private static Object clip;
+		private Object clip;
 
-	private static List<Object> clips;
+		private List<Object> clips;
+
+		/**
+		 * Copies single object.
+		 * 
+		 * @param object
+		 *            the object to copy
+		 */
+		void Copy(Object object) {
+			multiSelectFlg = false;
+			clip = ShimModelManager.makeClone(object);
+		}
+
+		/**
+		 * Copies multiple objects.
+		 * 
+		 * @param selist
+		 *            the object list to copy
+		 */
+		void Copy(List<Object> selist) {
+			multiSelectFlg = true;
+			clips = new ArrayList<Object>();
+			for (Object o : selist) {
+				clips.add(ShimModelManager.makeClone(o));
+			}
+		}
+
+		/**
+		 * Returns items of the clipboard.
+		 * 
+		 * @return items of the clipboard
+		 */
+		Object Paste() {
+			if (multiSelectFlg) {
+				List<Object> dclips = new ArrayList<Object>();
+				for (Object o : clips) {
+					dclips.add(ShimModelManager.makeClone(o));
+				}
+				return dclips;
+
+			} else {
+				return ShimModelManager.makeClone(clip);
+			}
+		}
+
+		/**
+		 * Whether clipboard is empty or not
+		 * 
+		 * @return Returns true if there is some paste item, and false otherwise.
+		 */
+		boolean canPaste() {
+			return clip != null || (clips != null && !clips.isEmpty());
+		}
+	}
+	
+	private static final ClipboardImpl windowClipboard = new ClipboardImpl();
+
+	private static ClipboardImpl dialogClipboard;
+	private static IWizardPage callFrom;
 
 	/**
 	 * Copies single object.
@@ -26,8 +94,21 @@ public class MyClipboard {
 	 *            the object to copy
 	 */
 	public static void Copy(Object object) {
-		multiSelectFlg = false;
-		clip = ShimModelManager.makeClone(object);
+		IWizardPage currentCallFrom = ControlUtil.getCurrentWizardPage();
+		if (currentCallFrom != null) {
+			if (callFrom != null && currentCallFrom.equals(callFrom)) {
+				dialogClipboard.Copy(object);
+				
+			} else {
+				dialogClipboard = new ClipboardImpl();
+				dialogClipboard.Copy(object);
+				callFrom = currentCallFrom;
+			}
+		} else {
+			windowClipboard.Copy(object);
+			dialogClipboard = null;
+			callFrom = null;
+		}
 	}
 
 	/**
@@ -37,10 +118,20 @@ public class MyClipboard {
 	 *            the object list to copy
 	 */
 	public static void Copy(List<Object> selist) {
-		multiSelectFlg = true;
-		clips = new ArrayList<Object>();
-		for (Object o : selist) {
-			clips.add(ShimModelManager.makeClone(o));
+		IWizardPage currentCallFrom = ControlUtil.getCurrentWizardPage();
+		if (currentCallFrom != null) {
+			if (callFrom != null && currentCallFrom.equals(callFrom)) {
+				dialogClipboard.Copy(selist);
+				
+			} else {
+				dialogClipboard = new ClipboardImpl();
+				dialogClipboard.Copy(selist);
+				callFrom = currentCallFrom;
+			}
+		} else {
+			windowClipboard.Copy(selist);
+			dialogClipboard = null;
+			callFrom = null;
 		}
 	}
 
@@ -50,15 +141,15 @@ public class MyClipboard {
 	 * @return items of the clipboard
 	 */
 	public static Object Paste() {
-		if (multiSelectFlg) {
-			List<Object> dclips = new ArrayList<Object>();
-			for (Object o : clips) {
-				dclips.add(ShimModelManager.makeClone(o));
+		IWizardPage currentCallFrom = ControlUtil.getCurrentWizardPage();
+		if (currentCallFrom != null) {
+			if (callFrom != null && currentCallFrom.equals(callFrom)) {
+				return dialogClipboard.Paste();
 			}
-			return dclips;
-
+			return null;
+			
 		} else {
-			return ShimModelManager.makeClone(clip);
+			return windowClipboard.Paste();
 		}
 	}
 
@@ -68,6 +159,15 @@ public class MyClipboard {
 	 * @return Returns true if there is some paste item, and false otherwise.
 	 */
 	public static boolean canPaste() {
-		return clip != null || (clips != null && !clips.isEmpty());
+		IWizardPage currentCallFrom = ControlUtil.getCurrentWizardPage();
+		if (currentCallFrom != null) {
+			if (callFrom != null && currentCallFrom.equals(callFrom)) {
+				return dialogClipboard.canPaste();
+			}
+			return false;
+			
+		} else {
+			return windowClipboard.canPaste();
+		}
 	}
 }

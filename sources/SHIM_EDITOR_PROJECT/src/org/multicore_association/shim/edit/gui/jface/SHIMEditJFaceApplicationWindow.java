@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
@@ -434,6 +436,9 @@ public class SHIMEditJFaceApplicationWindow extends ApplicationWindow implements
 		shimComponentTreeViewer
 				.setContentProvider(new ComponentTreeItemProvider());
 
+		TreeViewerColumnResizeListener.addTreeViewerColumnResizeListener(
+				treeComponentSet, new int[] { 300 });
+
 		SelectionListener selectionListener = new SelectionListener() {
 
 			/**
@@ -577,6 +582,9 @@ public class SHIMEditJFaceApplicationWindow extends ApplicationWindow implements
 			shimAddressSpaceTreeViewer
 					.setContentProvider(new AddressSpaceTreeItemProvider());
 
+			TreeViewerColumnResizeListener.addTreeViewerColumnResizeListener(
+					treeAddressSpaceSet, new int[] { 295 });
+
 		}
 		compositeStackAddressSpace = new Composite(compositeAddressSpaces,
 				SWT.NONE);
@@ -650,7 +658,8 @@ public class SHIMEditJFaceApplicationWindow extends ApplicationWindow implements
 							}
 
 							if (!isFound) {
-								// If there is the AccessType which has the same name,
+								// If there is the AccessType which has the same
+								// name,
 								// replaces with it.
 								performance.setAccessTypeRef(replace);
 								if (replace == null) {
@@ -718,9 +727,9 @@ public class SHIMEditJFaceApplicationWindow extends ApplicationWindow implements
 				} else if (selectedObject instanceof MemoryConsistencyModel) {
 					inputPanel = inputPanelMemoryConsistencyModel;
 				}
-				
+
 				currentAddressSpacePanel = inputPanel;
-				
+
 				changeInputPanel(item, inputPanel, compositeStackAddressSpace,
 						shimAddressSpaceTreeViewer);
 			}
@@ -761,6 +770,9 @@ public class SHIMEditJFaceApplicationWindow extends ApplicationWindow implements
 				.setLabelProvider(new CommunicationSetTreeLabelProvider());
 		shimCommunicationTreeViewer
 				.setContentProvider(new CommunicationSetTreeItemProvider());
+		
+		TreeViewerColumnResizeListener.addTreeViewerColumnResizeListener(
+				treeCommunicationSet, new int[] { 304 });
 
 		compositeStackCommunications = new Composite(composite_Communications,
 				SWT.NONE);

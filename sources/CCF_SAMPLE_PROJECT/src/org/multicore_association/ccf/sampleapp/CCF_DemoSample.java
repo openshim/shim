@@ -1,8 +1,11 @@
 /*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
 package org.multicore_association.ccf.sampleapp;
+
 import javax.xml.bind.UnmarshalException;
 
 import org.eclipse.jface.action.Action;
@@ -30,7 +33,7 @@ import org.multicore_association.ccf.api.DefineSet;
 import swing2swt.layout.BorderLayout;
 import swing2swt.layout.BoxLayout;
 
-public class CCF_DemoSample2 extends ApplicationWindow implements
+public class CCF_DemoSample extends ApplicationWindow implements
 		SelectionListener {
 
 	public Button btnOpenccfclockselect;
@@ -51,7 +54,7 @@ public class CCF_DemoSample2 extends ApplicationWindow implements
 	/**
 	 * Create the application window.
 	 */
-	public CCF_DemoSample2() {
+	public CCF_DemoSample() {
 		super(null);
 		createActions();
 		addToolBar(SWT.FLAT | SWT.WRAP);
@@ -156,7 +159,7 @@ public class CCF_DemoSample2 extends ApplicationWindow implements
 	 */
 	public static void main(String args[]) {
 		try {
-			CCF_DemoSample2 window = new CCF_DemoSample2();
+			CCF_DemoSample window = new CCF_DemoSample();
 			window.setBlockOnOpen(true);
 			window.open();
 			Display.getCurrent().dispose();
@@ -246,7 +249,8 @@ public class CCF_DemoSample2 extends ApplicationWindow implements
 
 		DefineSet defset = cfset.getDefineSet();
 
-		for (org.multicore_association.ccf.api.Configuration cf : cfset.getConfiguration()) {
+		for (org.multicore_association.ccf.api.Configuration cf : cfset
+				.getConfiguration()) {
 			// if(cf.getFormType()== FormType.SELECT){
 			CCF_ConfigurationComposite ccfComposite1 = new CCF_ConfigurationComposite(
 					container, SWT.NONE);

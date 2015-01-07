@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
@@ -225,7 +227,7 @@ public class ShimObjectTableViewer extends TableViewer {
 				}
 				
 				// Verify the uniqueness of the name attribute.
-				if (ShimModelAdapter.hasNameAttribute(so.getObj()) && nameAttributeChecker == null) {
+				if (ShimModelAdapter.hasNameAttribute(so.getObj())) {
 					@SuppressWarnings("unchecked")
 					List<ShimObject> objectList = (List<ShimObject>) shimObjectTableViewer
 							.getInput();

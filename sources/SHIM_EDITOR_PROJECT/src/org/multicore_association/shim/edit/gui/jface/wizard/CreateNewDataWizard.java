@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
@@ -86,9 +88,9 @@ public class CreateNewDataWizard extends Wizard {
 		setWindowTitle("Create New SHIM Data Wizard");
 		ShimPreferences.getNewInstance();
 
-		SystemConfiguration sys = ShimModelManager.createSystemConfiguration();
-		sys.setAddressSpaceSet(new AddressSpaceSet());
-		sys.setCommunicationSet(new CommunicationSet());
+		SystemConfiguration system = ShimModelManager.createSystemConfiguration();
+		system.setAddressSpaceSet(new AddressSpaceSet());
+		system.setCommunicationSet(new CommunicationSet());
 
 		log.info(getWindowTitle() + " open");
 	}
@@ -301,7 +303,8 @@ public class CreateNewDataWizard extends Wizard {
 		}
 		monitor.beginTask("Creates the base Communications.", taskNum);
 
-		CommunicationSet communicationSet = sys.getCommunicationSet();
+		CommunicationSet communicationSet = new CommunicationSet();
+		sys.setCommunicationSet(communicationSet);
 
 		log.finest(("#####CommunicationSet(5th) Completed!!"));
 

@@ -1,800 +1,799 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <SystemConfiguration name="BCM2835" shimVersion="1.0">
-    <ComponentSet name="Cluster_0">
-        <ComponentSet name="Cluster_0_0">
-            <SlaveComponent name="SDRAM" id="SC_SHIMEDITOR1719675348315220141104164340425" size="512" sizeUnit="MiB" rwType="RWX"/>
-            <SlaveComponent name="TCM_0" id="SC_SHIMEDITOR1748652510047720141104164340425" size="8" sizeUnit="KiB" rwType="RWX"/>
-            <SlaveComponent name="TCM_1" id="SC_SHIMEDITOR1732143430954920141104171551772" size="8" sizeUnit="KiB" rwType="RWX"/>
-            <MasterComponent name="ARM1176JZF-S_0_0_0" id="MC_SHIMEDITOR1649587703229320141104164340425" masterType="PU" arch="ARM11" archOption="" pid="10" nThread="1" endian="LITTLE">
-                <CommonInstructionSet name="LLVM Instructions">
-                    <Instruction name="ret">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="br">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="switch">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="indirectbr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="invoke">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="resume">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="unreachable">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="add">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fadd">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sub">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fsub">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="mul">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fmul">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="udiv">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sdiv">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fdiv">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="urem">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="srem">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="frem">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="shl">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="lshr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="ashr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="and">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="or">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="xor">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="extractelement">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="insertelement">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="shufflevector">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="extractivalue">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="insertvalue">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="alloca">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="load">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="store">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fence">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="cmpxchg">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="atomicrmw">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="getelementptr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="trunc">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="zext">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sext">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fptrunc">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fpext">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fptoui">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="uitofp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sitofp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="ptrtoint">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="uitofp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sitofp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="ptrtoint">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="inttoptr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="bitcast">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="icmp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fcmp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="phi">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="select">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="call">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="va_arg">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="landingpad">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                </CommonInstructionSet>
-                <Cache name="DataCache_0_0_0" id="C_SHIMEDITOR679636012575120141104164418091" cacheType="DATA" cacheCoherency="HARD" size="16" sizeUnit="KiB" nWay="4" lineSize="32" lockDownType="WAY"/>
-                <Cache name="InstructionCache_0_0_0" id="C_SHIMEDITOR176935291542920141104164418091" cacheType="INSTRUCTION" cacheCoherency="HARD" size="16" sizeUnit="KiB" nWay="4" lineSize="32" lockDownType="WAY"/>
-                <ClockFrequency clockValue="4.0E8"/>
-                <AccessTypeSet>
-                    <AccessType name="AT_0_0_0_0" id="AT_SHIMEDITOR1634068389515620141104164418091" rwType="RW" accessByteSize="1" alignmentByteSize="1" nBurst="8"/>
-                    <AccessType name="AT_0_0_0_1" id="AT_SHIMEDITOR1766536087660420141104164418091" rwType="RW" accessByteSize="2" alignmentByteSize="2" nBurst="8"/>
-                    <AccessType name="AT_0_0_0_2" id="AT_SHIMEDITOR1210594434426420141104164418091" rwType="RW" accessByteSize="4" alignmentByteSize="4" nBurst="8"/>
-                    <AccessType name="AT_0_0_0_3" id="AT_SHIMEDITOR1200580560571620141104164418091" rwType="RW" accessByteSize="8" alignmentByteSize="8" nBurst="8"/>
-                </AccessTypeSet>
-            </MasterComponent>
-            <MasterComponent name="VideoCore" id="MC_SHIMEDITOR118460904913920141104171715143" masterType="TU" arch="Broadcom VideoCore IV" archOption="" pid="11" nThread="1" endian="LITTLE">
-                <CommonInstructionSet name="LLVM Instructions">
-                    <Instruction name="ret">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="br">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="switch">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="indirectbr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="invoke">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="resume">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="unreachable">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="add">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fadd">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sub">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fsub">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="mul">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fmul">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="udiv">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sdiv">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fdiv">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="urem">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="srem">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="frem">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="shl">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="lshr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="ashr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="and">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="or">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="xor">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="extractelement">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="insertelement">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="shufflevector">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="extractivalue">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="insertvalue">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="alloca">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="load">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="store">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fence">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="cmpxchg">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="atomicrmw">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="getelementptr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="trunc">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="zext">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sext">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fptrunc">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fpext">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fptoui">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="uitofp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sitofp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="ptrtoint">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="uitofp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="sitofp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="ptrtoint">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="inttoptr">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="bitcast">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="icmp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="fcmp">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="phi">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="select">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="call">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="va_arg">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                    <Instruction name="landingpad">
-                        <Performance>
-                            <Pitch best="10.0" typical="10.0" worst="10.0"/>
-                            <Latency best="10.0" typical="10.0" worst="10.0"/>
-                        </Performance>
-                    </Instruction>
-                </CommonInstructionSet>
-                <Cache name="L2_SystemCache" id="C_SHIMEDITOR1142408455316420141104173608465" cacheType="UNIFIED" cacheCoherency="HARD" size="128" sizeUnit="KiB" nWay="4" lineSize="32" lockDownType="LINE"/>
-                <ClockFrequency clockValue="0.0"/>
-                <AccessTypeSet>
-                    <AccessType name="AT_New" id="AT_SHIMEDITOR255072759061120141104171715153" rwType="RW" accessByteSize="4" alignmentByteSize="4" nBurst="64"/>
-                </AccessTypeSet>
-            </MasterComponent>
-        </ComponentSet>
+  <ComponentSet name="Cluster_0">
+    <ComponentSet name="Cluster_0_0">
+      <SlaveComponent name="SDRAM" id="SC_SHIMEDITOR1719675348315220141104164340425" size="512" sizeUnit="MiB" rwType="RWX"/>
+      <SlaveComponent name="TCM_0" id="SC_SHIMEDITOR1748652510047720141104164340425" size="8" sizeUnit="KiB" rwType="RWX"/>
+      <SlaveComponent name="TCM_1" id="SC_SHIMEDITOR1732143430954920141104171551772" size="8" sizeUnit="KiB" rwType="RWX"/>
+      <MasterComponent name="ARM1176JZF-S_0_0_0" id="MC_SHIMEDITOR1649587703229320141104164340425" masterType="PU" arch="ARM11" archOption="" pid="10" nThread="1" endian="LITTLE">
+        <CommonInstructionSet name="LLVM Instructions">
+          <Instruction name="ret">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="br">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="switch">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="indirectbr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="invoke">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="resume">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="unreachable">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="add">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fadd">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sub">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fsub">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="mul">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fmul">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="udiv">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sdiv">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fdiv">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="urem">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="srem">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="frem">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="shl">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="lshr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="ashr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="and">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="or">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="xor">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="extractelement">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="insertelement">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="shufflevector">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="extractivalue">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="insertvalue">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="alloca">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="load">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="store">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fence">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="cmpxchg">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="atomicrmw">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="getelementptr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="trunc">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="zext">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sext">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fptrunc">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fpext">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fptoui">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="uitofp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sitofp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="ptrtoint">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="uitofp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sitofp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="ptrtoint">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="inttoptr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="bitcast">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="icmp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fcmp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="phi">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="select">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="call">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="va_arg">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="landingpad">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+        </CommonInstructionSet>
+        <Cache name="DataCache_0_0_0" id="C_SHIMEDITOR679636012575120141104164418091" cacheType="DATA" cacheCoherency="HARD" size="16" sizeUnit="KiB" nWay="4" lineSize="32" lockDownType="WAY"/>
+        <Cache name="InstructionCache_0_0_0" id="C_SHIMEDITOR176935291542920141104164418091" cacheType="INSTRUCTION" cacheCoherency="HARD" size="16" sizeUnit="KiB" nWay="4" lineSize="32" lockDownType="WAY"/>
+        <ClockFrequency clockValue="4.0E8"/>
+        <AccessTypeSet>
+          <AccessType name="AT_0_0_0_0" id="AT_SHIMEDITOR1634068389515620141104164418091" rwType="RW" accessByteSize="1" alignmentByteSize="1" nBurst="8"/>
+          <AccessType name="AT_0_0_0_1" id="AT_SHIMEDITOR1766536087660420141104164418091" rwType="RW" accessByteSize="2" alignmentByteSize="2" nBurst="8"/>
+          <AccessType name="AT_0_0_0_2" id="AT_SHIMEDITOR1210594434426420141104164418091" rwType="RW" accessByteSize="4" alignmentByteSize="4" nBurst="8"/>
+          <AccessType name="AT_0_0_0_3" id="AT_SHIMEDITOR1200580560571620141104164418091" rwType="RW" accessByteSize="8" alignmentByteSize="8" nBurst="8"/>
+        </AccessTypeSet>
+      </MasterComponent>
+      <MasterComponent name="VideoCore" id="MC_SHIMEDITOR118460904913920141104171715143" masterType="TU" arch="Broadcom VideoCore IV" archOption="" pid="11" nThread="1" endian="LITTLE">
+        <CommonInstructionSet name="LLVM Instructions">
+          <Instruction name="ret">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="br">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="switch">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="indirectbr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="invoke">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="resume">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="unreachable">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="add">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fadd">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sub">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fsub">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="mul">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fmul">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="udiv">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sdiv">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fdiv">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="urem">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="srem">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="frem">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="shl">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="lshr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="ashr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="and">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="or">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="xor">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="extractelement">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="insertelement">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="shufflevector">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="extractivalue">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="insertvalue">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="alloca">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="load">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="store">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fence">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="cmpxchg">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="atomicrmw">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="getelementptr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="trunc">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="zext">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sext">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fptrunc">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fpext">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fptoui">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="uitofp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sitofp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="ptrtoint">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="uitofp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="sitofp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="ptrtoint">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="inttoptr">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="bitcast">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="icmp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="fcmp">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="phi">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="select">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="call">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="va_arg">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+          <Instruction name="landingpad">
+            <Performance>
+              <Pitch best="10.0" typical="10.0" worst="10.0"/>
+              <Latency best="10.0" typical="10.0" worst="10.0"/>
+            </Performance>
+          </Instruction>
+        </CommonInstructionSet>
+        <Cache name="L2_SystemCache" id="C_SHIMEDITOR1142408455316420141104173608465" cacheType="UNIFIED" cacheCoherency="HARD" size="128" sizeUnit="KiB" nWay="4" lineSize="32" lockDownType="LINE"/>
+        <ClockFrequency clockValue="0.0"/>
+        <AccessTypeSet>
+          <AccessType name="AT_New" id="AT_SHIMEDITOR255072759061120141104171715153" rwType="RW" accessByteSize="4" alignmentByteSize="4" nBurst="64"/>
+        </AccessTypeSet>
+      </MasterComponent>
     </ComponentSet>
-    <CommunicationSet>
-        <SharedMemoryCommunication operationType="OTHER" dataSize="128" dataSizeUnit="KiB" addressSpaceRef="AS_SHIMEDITOR1614312076982720141104164341295" subSpaceRef="SS_SHIMEDITOR664244536758520141104164341295" name="shmem_1">
-            <ConnectionSet>
-                <Connection from="MC_SHIMEDITOR1649587703229320141104164340425" to="MC_SHIMEDITOR118460904913920141104171715143"/>
-                <Connection from="MC_SHIMEDITOR118460904913920141104171715143" to="MC_SHIMEDITOR1649587703229320141104164340425"/>
-            </ConnectionSet>
-        </SharedMemoryCommunication>
-        <InterruptCommunication name="Interrupt_1">
-            <ConnectionSet>
-                <Connection from="MC_SHIMEDITOR118460904913920141104171715143" to="MC_SHIMEDITOR1649587703229320141104164340425"/>
-            </ConnectionSet>
-        </InterruptCommunication>
-    </CommunicationSet>
-    <AddressSpaceSet>
-        <AddressSpace name="AS_0_0" id="AS_SHIMEDITOR1614312076982720141104164341295">
-            <SubSpace name="SDRAM" id="SS_SHIMEDITOR1825023691692820141104164341295" start="0" end="469762048" endian="LITTLE">
-                <MemoryConsistencyModel rawOrdering="ORDERD" warOrdering="ORDERD" wawOrdering="ORDERD" rarOrdering="ORDERD"/>
-                <MasterSlaveBindingSet>
-                    <MasterSlaveBinding slaveComponentRef="SC_SHIMEDITOR1719675348315220141104164340425">
-                        <Accessor masterComponentRef="MC_SHIMEDITOR1649587703229320141104164340425">
-                            <PerformanceSet>
-<Performance accessTypeRef="AT_SHIMEDITOR1634068389515620141104164418091">
-    <Pitch best="10.0" typical="10.0" worst="10.0"/>
-    <Latency best="10.0" typical="10.0" worst="10.0"/>
-</Performance>
-<Performance accessTypeRef="AT_SHIMEDITOR1766536087660420141104164418091">
-    <Pitch best="10.0" typical="10.0" worst="10.0"/>
-    <Latency best="10.0" typical="10.0" worst="10.0"/>
-</Performance>
-<Performance accessTypeRef="AT_SHIMEDITOR1210594434426420141104164418091">
-    <Pitch best="10.0" typical="10.0" worst="10.0"/>
-    <Latency best="10.0" typical="10.0" worst="10.0"/>
-</Performance>
-<Performance accessTypeRef="AT_SHIMEDITOR1200580560571620141104164418091">
-    <Pitch best="10.0" typical="10.0" worst="10.0"/>
-    <Latency best="10.0" typical="10.0" worst="10.0"/>
-</Performance>
-                            </PerformanceSet>
-                        </Accessor>
-                    </MasterSlaveBinding>
-                </MasterSlaveBindingSet>
-            </SubSpace>
-            <SubSpace name="VC_SDRAM" id="SS_SHIMEDITOR664244536758520141104164341295" start="469762048" end="536870912" endian="LITTLE">
-                <MemoryConsistencyModel rawOrdering="ORDERD" warOrdering="ORDERD" wawOrdering="ORDERD" rarOrdering="ORDERD"/>
-                <MasterSlaveBindingSet>
-                    <MasterSlaveBinding slaveComponentRef="SC_SHIMEDITOR1719675348315220141104164340425">
-                        <Accessor masterComponentRef="MC_SHIMEDITOR1649587703229320141104164340425">
-                            <PerformanceSet>
-<Performance accessTypeRef="AT_SHIMEDITOR1634068389515620141104164418091">
-    <Pitch best="10.0" typical="10.0" worst="10.0"/>
-    <Latency best="10.0" typical="10.0" worst="10.0"/>
-</Performance>
-<Performance accessTypeRef="AT_SHIMEDITOR1766536087660420141104164418091">
-    <Pitch best="10.0" typical="10.0" worst="10.0"/>
-    <Latency best="10.0" typical="10.0" worst="10.0"/>
-</Performance>
-<Performance accessTypeRef="AT_SHIMEDITOR1210594434426420141104164418091">
-    <Pitch best="10.0" typical="10.0" worst="10.0"/>
-    <Latency best="10.0" typical="10.0" worst="10.0"/>
-</Performance>
-<Performance accessTypeRef="AT_SHIMEDITOR1200580560571620141104164418091">
-    <Pitch best="10.0" typical="10.0" worst="10.0"/>
-    <Latency best="10.0" typical="10.0" worst="10.0"/>
-</Performance>
-                            </PerformanceSet>
-                        </Accessor>
-                    </MasterSlaveBinding>
-                </MasterSlaveBindingSet>
-            </SubSpace>
-        </AddressSpace>
-    </AddressSpaceSet>
-    <ClockFrequency clockValue="1.0E8"/>
+  </ComponentSet>
+  <CommunicationSet>
+    <SharedMemoryCommunication operationType="OTHER" dataSize="128" dataSizeUnit="KiB" addressSpaceRef="AS_SHIMEDITOR1614312076982720141104164341295" subSpaceRef="SS_SHIMEDITOR664244536758520141104164341295" name="shmem_1">
+      <ConnectionSet>
+        <Connection from="MC_SHIMEDITOR1649587703229320141104164340425" to="MC_SHIMEDITOR118460904913920141104171715143"/>
+        <Connection from="MC_SHIMEDITOR118460904913920141104171715143" to="MC_SHIMEDITOR1649587703229320141104164340425"/>
+      </ConnectionSet>
+    </SharedMemoryCommunication>
+    <InterruptCommunication name="Interrupt_1">
+      <ConnectionSet>
+        <Connection from="MC_SHIMEDITOR118460904913920141104171715143" to="MC_SHIMEDITOR1649587703229320141104164340425"/>
+      </ConnectionSet>
+    </InterruptCommunication>
+  </CommunicationSet>
+  <AddressSpaceSet>
+    <AddressSpace name="AS_0_0" id="AS_SHIMEDITOR1614312076982720141104164341295">
+      <SubSpace name="SDRAM" id="SS_SHIMEDITOR1825023691692820141104164341295" start="0" end="469762048" endian="LITTLE">
+        <MemoryConsistencyModel rawOrdering="ORDERD" warOrdering="ORDERD" wawOrdering="ORDERD" rarOrdering="ORDERD"/>
+        <MasterSlaveBindingSet>
+          <MasterSlaveBinding slaveComponentRef="SC_SHIMEDITOR1719675348315220141104164340425">
+            <Accessor masterComponentRef="MC_SHIMEDITOR1649587703229320141104164340425">
+              <PerformanceSet>
+                <Performance accessTypeRef="AT_SHIMEDITOR1634068389515620141104164418091">
+                  <Pitch best="10.0" typical="10.0" worst="10.0"/>
+                  <Latency best="10.0" typical="10.0" worst="10.0"/>
+                </Performance>
+                <Performance accessTypeRef="AT_SHIMEDITOR1766536087660420141104164418091">
+                  <Pitch best="10.0" typical="10.0" worst="10.0"/>
+                  <Latency best="10.0" typical="10.0" worst="10.0"/>
+                </Performance>
+                <Performance accessTypeRef="AT_SHIMEDITOR1210594434426420141104164418091">
+                  <Pitch best="10.0" typical="10.0" worst="10.0"/>
+                  <Latency best="10.0" typical="10.0" worst="10.0"/>
+                </Performance>
+                <Performance accessTypeRef="AT_SHIMEDITOR1200580560571620141104164418091">
+                  <Pitch best="10.0" typical="10.0" worst="10.0"/>
+                  <Latency best="10.0" typical="10.0" worst="10.0"/>
+                </Performance>
+              </PerformanceSet>
+            </Accessor>
+          </MasterSlaveBinding>
+        </MasterSlaveBindingSet>
+      </SubSpace>
+      <SubSpace name="VC_SDRAM" id="SS_SHIMEDITOR664244536758520141104164341295" start="469762048" end="536870912" endian="LITTLE">
+        <MemoryConsistencyModel rawOrdering="ORDERD" warOrdering="ORDERD" wawOrdering="ORDERD" rarOrdering="ORDERD"/>
+        <MasterSlaveBindingSet>
+          <MasterSlaveBinding slaveComponentRef="SC_SHIMEDITOR1719675348315220141104164340425">
+            <Accessor masterComponentRef="MC_SHIMEDITOR1649587703229320141104164340425">
+              <PerformanceSet>
+                <Performance accessTypeRef="AT_SHIMEDITOR1634068389515620141104164418091">
+                  <Pitch best="10.0" typical="10.0" worst="10.0"/>
+                  <Latency best="10.0" typical="10.0" worst="10.0"/>
+                </Performance>
+                <Performance accessTypeRef="AT_SHIMEDITOR1766536087660420141104164418091">
+                  <Pitch best="10.0" typical="10.0" worst="10.0"/>
+                  <Latency best="10.0" typical="10.0" worst="10.0"/>
+                </Performance>
+                <Performance accessTypeRef="AT_SHIMEDITOR1210594434426420141104164418091">
+                  <Pitch best="10.0" typical="10.0" worst="10.0"/>
+                  <Latency best="10.0" typical="10.0" worst="10.0"/>
+                </Performance>
+                <Performance accessTypeRef="AT_SHIMEDITOR1200580560571620141104164418091">
+                  <Pitch best="10.0" typical="10.0" worst="10.0"/>
+                  <Latency best="10.0" typical="10.0" worst="10.0"/>
+                </Performance>
+              </PerformanceSet>
+            </Accessor>
+          </MasterSlaveBinding>
+        </MasterSlaveBindingSet>
+      </SubSpace>
+    </AddressSpace>
+  </AddressSpaceSet>
+  <ClockFrequency clockValue="1.0E8"/>
 </SystemConfiguration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfigurationSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="CCF Sample for SHIM" xsi:noNamespaceSchemaLocation="ccf-schema.xsd">
+  <DefineSet>
+    <Def name="@sclock" path="/SystemConfiguration/ClockFrequency/@clockValue" uri="./jp.co.topscom.FromDS_Broadcom_BCM2835_ARM11.platformTemplete0_0.target_compiler_no.comp_ver_0_0.xml"/>
+    <Def name="@cashSize" path="//Cache[@name='L2_SystemCache']/@size" uri="./jp.co.topscom.FromDS_Broadcom_BCM2835_ARM11.platformTemplete0_0.target_compiler_no.comp_ver_0_0.xml"/>
+  </DefineSet>
+  <Configuration formType="select" name="System clockValue-Select" path="/SystemConfiguration/ClockFrequency/@clockValue" uri="./jp.co.topscom.FromDS_Broadcom_BCM2835_ARM11.platformTemplete0_0.target_compiler_no.comp_ver_0_0.xml">
+    <Item key="value" value="20.0">
+		  <Configuration formType="select" name="System clockValue-Select" path="/SystemConfiguration/ClockFrequency/@clockValue" uri="./jp.co.topscom.FromDS_Broadcom_BCM2835_ARM11.platformTemplete0_0.target_compiler_no.comp_ver_0_0.xml">
+		    <Item key="value" value="20.0"/>
+		    <Item key="value" value="40.0"/>
+		    <Item key="value" value="100.0"/>
+		  </Configuration>
+	</Item>
+    <Item key="value" value="40.0"/>
+    <Item key="value" value="100.0"/>
+  </Configuration>
+  <Configuration formType="expression" name="Sample Expression" path="//MasterComponent/ClockFrequency/@clockValue" uri="./jp.co.topscom.FromDS_Broadcom_BCM2835_ARM11.platformTemplete0_0.target_compiler_no.comp_ver_0_0.xml">
+    <Expression>
+      <description>description</description>
+      <Exp>@sclock * 2</Exp>
+    </Expression>
+  </Configuration>
+  <Configuration formType="text" name="Arch" path="//MasterComponent/@arch" uri="./jp.co.topscom.FromDS_Broadcom_BCM2835_ARM11.platformTemplete0_0.target_compiler_no.comp_ver_0_0.xml"/>
+  <Configuration formType="integer" name="dataSize" path="//SharedMemoryCommunication/@dataSize" uri="./jp.co.topscom.FromDS_Broadcom_BCM2835_ARM11.platformTemplete0_0.target_compiler_no.comp_ver_0_0.xml"/>
+  <Configuration formType="float" name="ClockFrequency:clockValue" path="/SystemConfiguration/ClockFrequency/@clockValue" uri="./jp.co.topscom.FromDS_Broadcom_BCM2835_ARM11.platformTemplete0_0.target_compiler_no.comp_ver_0_0.xml"/>
+  <Configuration formType="bool" name="BooleValue Sample"/>
+</ConfigurationSet>

@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="ComponentSet" type="ComponentSet"/>
+	<xs:complexType name="ComponentSet">
+		<xs:sequence>
+			<xs:element name="ComponentSet" type="ComponentSet" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SlaveComponent" type="SlaveComponent" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MasterComponent" type="MasterComponent" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Cache" type="Cache" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="SlaveComponent" type="SlaveComponent"/>
+	<xs:complexType name="SlaveComponent">
+		<xs:annotation>
+			<xs:documentation>Memory</xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="id" use="required" type="xs:ID"/>
+		<xs:attribute name="size" use="required" type="xs:int"/>
+		<xs:attribute name="sizeUnit" use="required" type="SizeUnitType"/>
+		<xs:attribute name="rwType" use="required" type="RWType"/>
+	</xs:complexType>
+	<xs:element name="MasterComponent" type="MasterComponent"/>
+	<xs:complexType name="MasterComponent">
+		<xs:sequence>
+			<xs:element name="CommonInstructionSet" type="CommonInstructionSet" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="Cache" type="Cache" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="ClockFrequency" type="ClockFrequency" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AccessTypeSet" type="AccessTypeSet" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="id" use="required" type="xs:ID"/>
+		<xs:attribute name="masterType" use="required" type="MasterType"/>
+		<xs:attribute name="arch" use="required" type="xs:string"/>
+		<xs:attribute name="archOption" use="optional" type="xs:string"/>
+		<xs:attribute name="pid" use="optional" type="xs:string"/>
+		<xs:attribute name="nThread" use="optional" type="xs:int"/>
+		<xs:attribute name="endian" use="optional" type="EndianType"/>
+	</xs:complexType>
+	<xs:simpleType name="RWType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RW"/>
+			<xs:enumeration value="WX"/>
+			<xs:enumeration value="RX"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="W"/>
+			<xs:enumeration value="X"/>
+			<xs:enumeration value="RWX"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="AddressSpaceSet" type="AddressSpaceSet"/>
+	<xs:complexType name="AddressSpaceSet">
+		<xs:sequence>
+			<xs:element name="AddressSpace" type="AddressSpace" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AddressSpace" type="AddressSpace"/>
+	<xs:complexType name="AddressSpace">
+		<xs:sequence>
+			<xs:element name="SubSpace" type="SubSpace" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="id" use="required" type="xs:ID"/>
+	</xs:complexType>
+	<xs:element name="SubSpace" type="SubSpace"/>
+	<xs:complexType name="SubSpace">
+		<xs:sequence>
+			<xs:element name="MemoryConsistencyModel" type="MemoryConsistencyModel" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="MasterSlaveBindingSet" type="MasterSlaveBindingSet" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="id" use="required" type="xs:ID"/>
+		<xs:attribute name="start" use="required" type="xs:long"/>
+		<xs:attribute name="end" use="required" type="xs:long"/>
+		<xs:attribute name="endian" use="optional" type="EndianType"/>
+	</xs:complexType>
+	<xs:simpleType name="MasterType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PU">
+				<xs:annotation>
+					<xs:documentation>Processing Unit</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TU">
+				<xs:annotation>
+					<xs:documentation>Transffer Unit</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OTHER"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Instruction" type="Instruction"/>
+	<xs:complexType name="Instruction">
+		<xs:sequence>
+			<xs:element name="Performance" type="Performance" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="InterruptCommunication" type="InterruptCommunication"/>
+	<xs:complexType name="InterruptCommunication">
+		<xs:complexContent>
+			<xs:extension base="AbstractCommunication">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Latency" type="Latency"/>
+	<xs:complexType name="Latency">
+		<xs:complexContent>
+			<xs:extension base="AbstractPerformance">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="AbstractPerformance" type="AbstractPerformance"/>
+	<xs:complexType name="AbstractPerformance" abstract="true">
+		<xs:sequence/>
+		<xs:attribute name="best" use="optional" type="xs:float"/>
+		<xs:attribute name="typical" use="required" type="xs:float"/>
+		<xs:attribute name="worst" use="optional" type="xs:float"/>
+	</xs:complexType>
+	<xs:element name="Pitch" type="Pitch"/>
+	<xs:complexType name="Pitch">
+		<xs:complexContent>
+			<xs:extension base="AbstractPerformance">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="MasterSlaveBinding" type="MasterSlaveBinding"/>
+	<xs:complexType name="MasterSlaveBinding">
+		<xs:sequence>
+			<xs:element name="Accessor" type="Accessor" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="slaveComponentRef" use="required" type="xs:IDREF"/>
+	</xs:complexType>
+	<xs:element name="CommunicationSet" type="CommunicationSet"/>
+	<xs:complexType name="CommunicationSet">
+		<xs:sequence>
+			<xs:element name="SharedRegisterCommunication" type="SharedRegisterCommunication" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="SharedMemoryCommunication" type="SharedMemoryCommunication" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="EventCommunication" type="EventCommunication" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="FIFOCommunication" type="FIFOCommunication" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="InterruptCommunication" type="InterruptCommunication" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AbstractCommunication" type="AbstractCommunication"/>
+	<xs:complexType name="AbstractCommunication" abstract="true">
+		<xs:sequence>
+			<xs:element name="ConnectionSet" type="ConnectionSet" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="Connection" type="Connection"/>
+	<xs:complexType name="Connection">
+		<xs:sequence>
+			<xs:element name="Performance" type="Performance" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="from" use="required" type="xs:IDREF">
+			<xs:annotation>
+				<xs:documentation>Reference to the instance of MasterComponent</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="to" use="required" type="xs:IDREF">
+			<xs:annotation>
+				<xs:documentation>Reference to the instance of MasterComponent</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:element name="PerformanceSet" type="PerformanceSet"/>
+	<xs:complexType name="PerformanceSet">
+		<xs:sequence>
+			<xs:element name="Performance" type="Performance" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="FIFOCommunication" type="FIFOCommunication"/>
+	<xs:complexType name="FIFOCommunication">
+		<xs:complexContent>
+			<xs:extension base="AbstractCommunication">
+				<xs:sequence/>
+				<xs:attribute name="dataSize" use="required" type="xs:int"/>
+				<xs:attribute name="dataSizeUnit" use="optional" type="SizeUnitType"/>
+				<xs:attribute name="queueSize" use="required" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="CommonInstructionSet" type="CommonInstructionSet"/>
+	<xs:complexType name="CommonInstructionSet">
+		<xs:sequence>
+			<xs:element name="Instruction" type="Instruction" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="Cache" type="Cache"/>
+	<xs:complexType name="Cache">
+		<xs:sequence>
+			<xs:element name="cacheRef" type="xs:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="id" use="required" type="xs:ID"/>
+		<xs:attribute name="cacheType" use="required" type="CacheType">
+			<xs:annotation>
+				<xs:documentation>soft / hard</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="cacheCoherency" use="required" type="CacheCoherencyType"/>
+		<xs:attribute name="size" use="required" type="xs:int"/>
+		<xs:attribute name="sizeUnit" use="required" type="SizeUnitType"/>
+		<xs:attribute name="nWay" use="optional" type="xs:int"/>
+		<xs:attribute name="lineSize" use="optional" type="xs:int"/>
+		<xs:attribute name="lockDownType" use="optional" type="LockDownType"/>
+	</xs:complexType>
+	<xs:element name="SystemConfiguration" type="SystemConfiguration"/>
+	<xs:complexType name="SystemConfiguration">
+		<xs:sequence>
+			<xs:element name="ComponentSet" type="ComponentSet" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="CommunicationSet" type="CommunicationSet" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="AddressSpaceSet" type="AddressSpaceSet" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="ClockFrequency" type="ClockFrequency" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="shimVersion" use="required" type="xs:string"/>
+	</xs:complexType>
+	<xs:element name="ConnectionSet" type="ConnectionSet"/>
+	<xs:complexType name="ConnectionSet">
+		<xs:sequence>
+			<xs:element name="Connection" type="Connection" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CacheCoherencyType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SOFT"/>
+			<xs:enumeration value="HARD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="MemoryConsistencyModel" type="MemoryConsistencyModel"/>
+	<xs:complexType name="MemoryConsistencyModel">
+		<xs:sequence/>
+		<xs:attribute name="rawOrdering" use="optional" type="OrderingType">
+			<xs:annotation>
+				<xs:documentation>Read After Write</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="warOrdering" use="optional" type="OrderingType">
+			<xs:annotation>
+				<xs:documentation>Write After Read</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="wawOrdering" use="optional" type="OrderingType">
+			<xs:annotation>
+				<xs:documentation>Write After Write</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="rarOrdering" use="optional" type="OrderingType"/>
+	</xs:complexType>
+	<xs:simpleType name="OrderingType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ORDERD"/>
+			<xs:enumeration value="UNORDERD"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EndianType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="LITTLE"/>
+			<xs:enumeration value="BIG"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="SharedRegisterCommunication" type="SharedRegisterCommunication"/>
+	<xs:complexType name="SharedRegisterCommunication">
+		<xs:complexContent>
+			<xs:extension base="AbstractCommunication">
+				<xs:sequence/>
+				<xs:attribute name="dataSize" use="required" type="xs:int"/>
+				<xs:attribute name="dataSizeUnit" use="required" type="SizeUnitType"/>
+				<xs:attribute name="nRegister" use="required" type="xs:int"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="SharedMemoryCommunication" type="SharedMemoryCommunication"/>
+	<xs:complexType name="SharedMemoryCommunication">
+		<xs:complexContent>
+			<xs:extension base="AbstractCommunication">
+				<xs:sequence/>
+				<xs:attribute name="operationType" use="optional" type="OperationType"/>
+				<xs:attribute name="dataSize" use="optional" type="xs:int"/>
+				<xs:attribute name="dataSizeUnit" use="optional" type="SizeUnitType"/>
+				<xs:attribute name="addressSpaceRef" use="optional" type="xs:IDREF"/>
+				<xs:attribute name="subSpaceRef" use="optional" type="xs:IDREF"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="EventCommunication" type="EventCommunication"/>
+	<xs:complexType name="EventCommunication">
+		<xs:complexContent>
+			<xs:extension base="AbstractCommunication">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ClockFrequency" type="ClockFrequency"/>
+	<xs:complexType name="ClockFrequency">
+		<xs:sequence minOccurs="1"/>
+		<xs:attribute name="clockValue" use="required" type="xs:float"/>
+	</xs:complexType>
+	<xs:element name="Accessor" type="Accessor"/>
+	<xs:complexType name="Accessor">
+		<xs:sequence>
+			<xs:element name="PerformanceSet" type="PerformanceSet" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="masterComponentRef" use="required" type="xs:IDREF"/>
+	</xs:complexType>
+	<xs:element name="AccessType" type="AccessType"/>
+	<xs:complexType name="AccessType">
+		<xs:sequence minOccurs="1"/>
+		<xs:attribute name="name" use="required" type="xs:string"/>
+		<xs:attribute name="id" use="required" type="xs:ID"/>
+		<xs:attribute name="rwType" use="optional" type="RWType"/>
+		<xs:attribute name="accessByteSize" use="optional" type="xs:int"/>
+		<xs:attribute name="alignmentByteSize" use="optional" type="xs:int"/>
+		<xs:attribute name="nBurst" use="optional" type="xs:int"/>
+	</xs:complexType>
+	<xs:element name="MasterSlaveBindingSet" type="MasterSlaveBindingSet"/>
+	<xs:complexType name="MasterSlaveBindingSet">
+		<xs:sequence>
+			<xs:element name="MasterSlaveBinding" type="MasterSlaveBinding" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CacheType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DATA"/>
+			<xs:enumeration value="INSTRUCTION"/>
+			<xs:enumeration value="UNIFIED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Performance" type="Performance"/>
+	<xs:complexType name="Performance">
+		<xs:sequence>
+			<xs:element name="Pitch" type="Pitch" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Latency" type="Latency" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="accessTypeRef" use="optional" type="xs:IDREF"/>
+	</xs:complexType>
+	<xs:element name="AccessTypeSet" type="AccessTypeSet"/>
+	<xs:complexType name="AccessTypeSet">
+		<xs:sequence minOccurs="1" maxOccurs="1">
+			<xs:element name="AccessType" type="AccessType" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="SizeUnitType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="KiB"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="GiB"/>
+			<xs:enumeration value="MiB"/>
+			<xs:enumeration value="TiB"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LockDownType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="LINE"/>
+			<xs:enumeration value="NONE"/>
+			<xs:enumeration value="WAY"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OperationType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TAS">
+				<xs:annotation>
+					<xs:documentation>Test and Set</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LLSC">
+				<xs:annotation>
+					<xs:documentation>Load Link/Store Conditional</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CAX">
+				<xs:annotation>
+					<xs:documentation>Comopare and Exchange</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OTHER"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

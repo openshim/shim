@@ -1,0 +1,241 @@
+# ==============================================================================
+# Instruction Set Configuration for LLVM-Instructions
+# ==============================================================================
+#
+# Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+#
+# This software is released under the MIT License.
+# http://opensource.org/licenses/mit-license.php
+
+# When there is '#' in a line head, it'll be a comment.
+
+# ------------------------------------------------------------------------------
+# Header Section
+# Explanation:
+#     In this section, header definition of the generated code
+#     is described. Each entry describes a single line, or a description
+#     of the multiple lines is possible by making a deep indentation
+#     than the entry name.
+# ------------------------------------------------------------------------------
+[header]
+
+# iteration Entry
+#     The loop number of times which is at the time of cycle measurement.
+iteration = 10000
+
+# depth Entry
+#     The depth of the function calling which is at the time of
+#     CALL/RET cycle measurement.
+#
+depth = 100
+
+# try Entry
+#     Setting of how many times to repeat the same measurement.
+#
+try = 1000
+
+# continuity Entry
+#     Processing of how many times to make 1 order continue.
+#     For measurement of typical value.
+#
+continuity =  1
+
+
+# include Entry
+#     Describes the header file which does inclusion.
+#     ("#include" themselves do not write)
+#     More than one designation is possible, if you want to specify
+#     more than one, please describe one per line.
+include = \n\
+    <string.h>\n\
+    <alloca.h>
+
+# define Entry
+#     Describes the definition declared in #define.
+#     ("#define" themselves do not write)
+define =
+
+# global_variable Entry
+#     Declare a global variable
+global_variable = \n\
+    char LLVM_IR__ope_name[16];\n\
+    volatile unsigned int LLVM_IR__gubuf[8];\n\
+    volatile unsigned int LLVM_IR__guix;\n\
+    volatile unsigned char LLVM_IR__gucx;
+
+# function Entry
+#     Declare a function. Function to initialize the variable
+#     in the code that generates is declared mainly here.
+function = \n\
+    static unsigned int LLVM_IR__load_ui(unsigned int uiv) {	INSTR_BODY_0(uiv);  return uiv; }\n\
+    static int LLVM_IR__load_si(int siv) { INSTR_BODY_0(siv); return siv; }\n\
+    static float LLVM_IR__load_f(float fv) { INSTR_BODY_0(fv); return fv; }\n\
+    static double LLVM_IR__load_d(double dv) { INSTR_BODY_0(dv); return dv; }\n\
+    static char LLVM_IR__load_c(char cv) { INSTR_BODY_0(cv);  return cv; }\n\
+    static unsigned char LLVM_IR__load_uc(unsigned char ucv) { INSTR_BODY_0(ucv); return ucv; }\n\
+    void LLVM_IR__no_alloca(void) { \n\
+    \    EMPTY_BODY(); \n\
+    }\n\
+    void LLVM_IR__do_alloca(void) {\n\
+    \    volatile unsigned char * volatile pcx;\n\
+    \    pcx = alloca(64);\n\
+    }
+
+# ------------------------------------------------------------------------------
+# Main Function Section
+# Explanation:
+#     This section describes the process and the definition
+#     of the main function
+# ------------------------------------------------------------------------------
+[main]
+
+# variable Entry
+#     local variables that are declared in the main function.
+#     By using the register specifier, assigned to the register
+#     as much as possible rather than a memory variable.
+variable = \n\
+    volatile register char cx;\n\
+    volatile register unsigned char ucx;\n\
+    volatile register unsigned int uix, uiy, uiz;\n\
+    volatile register int six, siy, siz;\n\
+    volatile register float fx, fy, fz;\n\
+    volatile register double dx, dy;\n\
+    volatile unsigned int ubuf[8];\n\
+    volatile register int * volatile pix;\n\
+    volatile register float * volatile pfx;
+
+# initialize Entry
+#     Describes the initialization of the local variables and the like.
+initialize = \n\
+    cx  = LLVM_IR__load_c(0);\n\
+    ucx = LLVM_IR__load_uc(9);\n\
+    uix = LLVM_IR__load_ui(3);\n\
+    uiy = LLVM_IR__load_ui(5);\n\
+    uiz = LLVM_IR__load_ui(7);\n\
+    six = LLVM_IR__load_si(1);\n\
+    siy = LLVM_IR__load_si(2);\n\
+    siz = LLVM_IR__load_si(3);\n\
+    fx  = LLVM_IR__load_f(1.2f);\n\
+    fy  = LLVM_IR__load_f(3.4f);\n\
+    fz  = LLVM_IR__load_f(5.6f);\n\
+    dx  = LLVM_IR__load_d(7.8f);\n\
+    dy  = LLVM_IR__load_d(9.0f);
+
+# ------------------------------------------------------------------------------
+# Operation List Section
+# Explanation =
+#     Describe the list of measurement operation in this section.
+#     Describes the operation and two on each entry of the name of any.
+#     The 1st of operation for comparison and the 2nd will be measured
+#     operation. The number of times repeated execution of "iterator
+#     Entry" for each operation, and measures the difference between
+#     the two operations.
+# ------------------------------------------------------------------------------
+[operation]
+add = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy, uiz = uix + uiy);    /*add*/
+fadd = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(fx, fy, fz = fx + fy);         /*fadd*/
+sub = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy, uiz = uix - uiy);    /*sub*/
+fsub = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(fx, fy, fz = fx - fy);         /*fsub*/
+mul = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy,uiz = uix * uiy);    /*mul*/
+fmul = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(fx, fy, fz = fx * fy);         /*fmul*/
+udiv = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy,uiz = uix / uiy);    /*udiv*/
+sdiv = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(six, siy, siz = six / siy);    /*sdiv*/
+fdiv = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(fx, fy, fz = fx / fy);         /*fdiv*/
+urem = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy,uiz = uix % uiy);    /*urem*/
+srem = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(six, siy, siz = six % siy);    /*srem*/
+shl = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy, uiz = uix << uiy);          /*shl*/
+lshr = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy, uiz = uix >> uiy);          /*lshr*/
+ashr = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(six, siy, siz = six >> uiy);          /*ashr*/
+and = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy, uiz = uix & uiy);    /*and*/
+or = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy, uiz = uix | uiy);    /*or*/
+xor = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy, uiz = uix ^ uiy);    /*xor*/
+alloca = \n\
+    LLVM_IR__no_alloca(); /*alloca*/\n\
+    LLVM_IR__do_alloca(); /*alloca*/
+load = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(LLVM_IR__guix, uix, uix = LLVM_IR__guix);             /*load*/
+store = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, LLVM_IR__guix, LLVM_IR__guix = uix);              /*store*/
+#getelementptr = \n\
+#    INSTR_BODY_1(LLVM_IR__guix, uix = LLVM_IR__guix);  /*getelementptr*/\n\
+#    INSTR_BODY_1(i, uix = ubuf[i & 0x7]);           /*getelementptr*/
+trunc = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(six, cx, cx = (signed char)six);   /*trunc*/
+zext = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(ucx, uix, uix = (unsigned int)ucx); /*zext*/
+sext = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(cx, six, six = (signed int)cx);     /*sext*/
+fptrunc = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(dx, fx, fx = (float)dx);           /*fptrunc*/
+fpext = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(fx, dx, dx = (double)fx);          /*fpext*/
+fptoui = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(fx, uix, uix = (unsigned int)fx);   /*fptoui*/
+fptosi = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(fx, six, six = (signed int)fx);     /*fptosi*/
+uitofp = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, fx, fx = (float)uix);         /*uitofp*/
+sitofp = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(six, fx, fx = (float)six);         /*sitofp*/
+ptrtoint = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(pix, uix, uix = (unsigned int)pix); /*ptrtoint*/
+inttoptr = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, pix, pix = (signed int *)uix); /*inttoptr*/
+bitcast = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(pix, pfx, pfx = (float *)pix);      /*bitcast*/
+icmp = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(uix, uiy, uix == uiy);              /*icmp*/
+fcmp = \n\
+    EMPTY_BODY();/*empty*/\n\
+    INSTR_BODY_2(fx, fy, fx == fy);              /*fcmp*/
+
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="configure" name="ShimPerformanceMeasurementPlugin">
+    <property environment="env"/>
+
+    <target name="clean">
+        <ant dir="../MEASUREMENT_CYCLE_CODEGEN_PROJECT" target="clean"/>
+        <ant dir="../MEASUREMENT_CYCLE_WRITEBACK_PROJECT" target="clean"/>
+        <ant dir="../MEASUREMENT_MEMORY_CODEGEN_PROJECT" target="clean"/>
+        <ant dir="../MEASUREMENT_MEMORY_WRITEBACK_PROJECT" target="clean"/>
+        <delete file="lib/*.jar"/>
+    </target>
+    
+    <target name="cleanall" depends="clean" />
+    
+    <target name="configure">
+        <mkdir dir="lib"/>
+        <ant dir="../MEASUREMENT_CYCLE_CODEGEN_PROJECT"/>
+        <ant dir="../MEASUREMENT_CYCLE_WRITEBACK_PROJECT"/>
+        <ant dir="../MEASUREMENT_MEMORY_CODEGEN_PROJECT"/>
+        <ant dir="../MEASUREMENT_MEMORY_WRITEBACK_PROJECT"/>
+        <copy file="../MEASUREMENT_CYCLE_CODEGEN_PROJECT/MeasurementCycleCodegen.jar" todir="lib"/>
+        <copy file="../MEASUREMENT_CYCLE_WRITEBACK_PROJECT/MeasurementCycleWriteback.jar" todir="lib"/>
+        <copy file="../MEASUREMENT_MEMORY_CODEGEN_PROJECT/MeasurementMemoryCodegen.jar" todir="lib"/>
+        <copy file="../MEASUREMENT_MEMORY_WRITEBACK_PROJECT/MeasurementMemoryWriteback.jar" todir="lib"/>
+    </target>
+    
+</project>

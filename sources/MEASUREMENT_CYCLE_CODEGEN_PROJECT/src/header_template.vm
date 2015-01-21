@@ -1,0 +1,20 @@
+#*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ *#/*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+
+#ifndef INSTRUCTION_CYCLE_H_
+\#define INSTRUCTION_CYCLE_H_
+
+#foreach (${val} in ${funcNameList})
+int ${val}(void);
+#end
+
+#endif /* INSTRUCTION_CYCLE_H_ */

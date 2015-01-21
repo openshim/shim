@@ -1,0 +1,292 @@
+#*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ *#/*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+
+#foreach (${val} in ${instSetConfig.headerInclude})
+\#include ${val}
+#end
+#foreach (${val} in ${archConfig.headerInclude})
+\#include ${val}
+#end
+
+\#define ITERATION           (${instSetConfig.headerIteration})
+\#define DEPTH               (${instSetConfig.headerDepth})
+\#define TRY                 (${instSetConfig.headerTry})
+\#define MAX_CONTINUITY      (${instSetConfig.headerContinuity})
+
+\#define INSTRUCTION_NAME    ""
+
+#foreach (${val} in ${instSetConfig.headerDefine})
+\#define ${val}
+#end
+#foreach (${val} in ${archConfig.headerDefine})
+\#define ${val}
+#end
+
+#ifndef MAX
+\#define MAX(A, B)	(((A) > (B)) ? (A) : (B))
+#endif
+
+#ifndef MIN
+\#define MIN(A, B)	(((A) < (B)) ? (A) : (B))
+#endif
+
+#ifndef AGGR_TYPE
+#ifdef __GNUC__
+\#define AGGR_TYPE(X) __typeof__ (X)
+\#else
+\#if __STDC_VERSION__ >= 199901L
+\#define AGGR_TYPE(X) unsigned long long
+\#else
+\#define AGGR_TYPE(X) unsigned long
+#endif
+#endif
+#endif
+
+/* Macros for measurement result summary(TypeA) */
+#ifndef AGGREGATION_METHOD_A
+\#define AGGREGATION_METHOD_A(AGGR_LIST, AGGR_TRY, AGGR_ITR, AGGR_DEST)	\
+	do {																\
+		AGGR_TYPE(AGGR_LIST[0]) i, total = 0;							\
+		double mean;													\
+		for (i = 0; i < AGGR_TRY; i++) {								\
+			total += AGGR_LIST[i];										\
+		}																\
+		mean = (double)(total / (AGGR_ITR * AGGR_TRY));					\
+		AGGR_DEST[0] = (double)mean;									\
+		AGGR_DEST[1] = (double)mean;									\
+		AGGR_DEST[2] = (double)mean;									\
+	} while (0)
+#endif
+
+/* Macros for measurement result summary(TypeB) */
+#ifndef AGGREGATION_METHOD_B
+\#define AGGREGATION_METHOD_B(AGGR_LIST, AGGR_TRY, AGGR_ITR, AGGR_DEST)  \
+	do {																\
+		AGGR_TYPE(AGGR_LIST[0]) i, cmin, cmax = 0, count;				\
+		double log_base[AGGR_TRY], typical, logavg = 0, variance = 0;	\
+		cmin = (AGGR_TYPE(cmin))(~(AGGR_TYPE(cmin))0);					\
+		for (i = 0; i < AGGR_TRY; i++) {								\
+			cmin = MIN(cmin, AGGR_LIST[i]);								\
+			cmax = MAX(cmax, AGGR_LIST[i]);								\
+			log_base[i] = log(AGGR_LIST[i]);							\
+			logavg += log_base[i];										\
+		}																\
+		logavg /= AGGR_TRY;												\
+		for (i = 0; i < AGGR_TRY; i++) {								\
+			variance += pow(logavg - log_base[i], 2);					\
+		}																\
+		variance /= (AGGR_TRY - 1);										\
+		typical = exp(logavg - variance);								\
+		AGGR_DEST[0] = (double)(cmin / AGGR_ITR);						\
+		AGGR_DEST[1] = (double)(typical / AGGR_ITR);					\
+		AGGR_DEST[2] = (double)(cmax / AGGR_ITR);						\
+	} while (0)
+#endif
+
+/* Macro for optimization suppression */
+#ifndef UPDATE_VAR
+\#define UPDATE_VAR(V) do { ; } while (0)
+#endif
+#ifndef USE_VAR
+\#define USE_VAR(V)  do { ; } while (0)
+#endif
+#ifndef EMPTY_BODY
+\#define EMPTY_BODY()  do { ; } while (0)
+#endif
+#ifndef INSTR_BODY_0
+\#define INSTR_BODY_0(F)  do { F; } while (0)
+#endif
+#ifndef INSTR_BODY_1
+\#define INSTR_BODY_1(A,F)  do { F; } while (0)
+#endif
+#ifndef INSTR_BODY_2
+\#define INSTR_BODY_2(A,B,F)  do { F; } while (0)
+#endif
+#ifndef INSTR_BODY_3
+\#define INSTR_BODY_3(A,B,C,F)  do { F; } while (0)
+#endif
+#ifndef INSTR_BODY_4
+\#define INSTR_BODY_4(A,B,C,D,F)  do { F; } while (0)
+#endif
+#ifndef INSTR_BODY_5
+\#define INSTR_BODY_5(A,B,C,D,E,F)  do { F; } while (0)
+#endif
+#ifndef NOINLINE
+\#define NOINLINE  /**/
+#endif
+
+#foreach (${val} in ${instSetConfig.headerGlobalValiable})
+${val}
+#end
+#foreach (${val} in ${archConfig.headerGlobalValiable})
+${val}
+#end
+
+#foreach (${val} in ${instSetConfig.headerFunction})
+${val}
+#end
+#foreach (${val} in ${archConfig.headerFunction})
+${val}
+#end
+
+static void dive_00001(void);
+
+int ${funcName}(void)
+{
+    register int i, j;
+    int continuity_count;
+#foreach (${val} in ${instSetConfig.localValiable})
+    ${val}
+#end
+#foreach (${val} in ${archConfig.localValiable})
+    ${val}
+#end
+    do {
+#foreach (${val} in ${instSetConfig.localInitialize})
+        ${val}
+#end
+    } while(0);
+#foreach (${operation} in ${instSetConfig.operationList})
+    /* ${operation.name} */
+#ifdef INSTRUCTION_NAME
+#undef INSTRUCTION_NAME
+#endif
+\#define INSTRUCTION_NAME "${operation.name}"
+#foreach (${continuity} in [1 .. ${instSetConfig.headerContinuity}])
+#foreach (${val} in ${archConfig.mainContinuityBegin})
+        ${val}
+#end
+    continuity_count = ${continuity};
+#foreach (${val} in ${archConfig.mainTryDiffBegin})
+    ${val}
+#end
+    for (j = 0; j < TRY; j++) {
+#foreach (${val} in ${archConfig.mainMeasureDiffBegin})
+        ${val}
+#end
+        for (i = 0; i < ITERATION; i++) {
+#foreach (${val} in [1 .. ${continuity}])
+            ${operation.compareCode}
+#end
+        }
+#foreach (${val} in ${archConfig.mainMeasureDiffEnd})
+        ${val}
+#end
+    }
+#foreach (${val} in ${archConfig.mainTryDiffEnd})
+    ${val}
+#end
+#foreach (${val} in ${archConfig.mainTryTargetBegin})
+    ${val}
+#end
+    for (j = 0; j < TRY; j++) {
+#foreach (${val} in ${archConfig.mainMeasureTargetBegin})
+        ${val}
+#end
+        for (i = 0; i < ITERATION; i++) {
+#foreach (${val} in [1 .. ${continuity}])
+            ${operation.targetCode}
+#end
+        }
+#foreach (${val} in ${archConfig.mainMeasureTargetEnd})
+        ${val}
+#end
+    }
+#foreach (${val} in ${archConfig.mainTryTargetEnd})
+    ${val}
+#end
+#foreach (${val} in ${archConfig.mainContinuityEnd})
+    ${val}
+#end
+#end
+#end
+#if (${instSetConfig.headerDepth} > 0 && ((${outputControl.isMeasureCallOp()}) || (${outputControl.isMeasureRetOp()})))
+    // CALL/RET
+    continuity_count = 1;
+#if (${outputControl.isMeasureCallOp()})
+#foreach (${val} in ${archConfig.mainTryCallRetBegin})
+    ${val}
+#end
+    for (j = 0; j < TRY; j++) {
+#foreach (${val} in ${archConfig.mainMeasureCallInit})
+        ${val}
+#end
+#end
+#if (${outputControl.isMeasureRetOp()})
+#foreach (${val} in ${archConfig.mainMeasureRetInit})
+        ${val}
+#end
+#end
+#foreach (${val} in ${archConfig.mainMeasureBegin})
+        ${val}
+#end
+#foreach (${val} in ${archConfig.mainMeasureEnd})
+        ${val}
+#end
+#foreach (${val} in ${archConfig.mainMeasureResultDiff})
+        ${val}
+#end
+        for (i = 0; i < ITERATION/DEPTH; i++) {
+#if (${outputControl.isMeasureCallOp()})
+#foreach (${val} in ${archConfig.mainMeasureCallBegin})
+            ${val}
+#end
+#end
+            dive_00001();
+#if (${outputControl.isMeasureRetOp()})
+#foreach (${val} in ${archConfig.mainMeasureRetEnd})
+            ${val}
+#end
+#end
+        }
+#if (${outputControl.isMeasureCallOp()})
+#foreach (${val} in ${archConfig.mainMeasureCallResult})
+        ${val}
+#end
+#end
+#if (${outputControl.isMeasureRetOp()})
+#foreach (${val} in ${archConfig.mainMeasureRetResult})
+        ${val}
+#end
+#end
+    }
+#foreach (${val} in ${archConfig.mainTryCallRetEnd})
+    ${val}
+#end
+#end
+    return 0;
+}
+
+#if ((${instSetConfig.headerDepth} > 0) && ((${outputControl.isMeasureCallOp()}) || (${outputControl.isMeasureRetOp()})))
+NOINLINE
+static void dive_${instSetConfig.formatDepth(${instSetConfig.headerDepth})}(void)
+{
+#if (${outputControl.isMeasureCallOp()})
+#foreach (${val} in ${archConfig.mainMeasureCallEnd})
+    ${val}
+#end
+#end
+#if (${outputControl.isMeasureRetOp()})
+#foreach (${val} in ${archConfig.mainMeasureRetBegin})
+    ${val}
+#end
+#end
+    return;
+}
+#end
+#if (${instSetConfig.headerDepth} > 1 && ((${outputControl.isMeasureCallOp()}) || (${outputControl.isMeasureRetOp()})))
+#foreach (${i} in [${instSetConfig.headerDepth}..2])
+#set ($j = ${i} - 1)
+NOINLINE
+static void dive_${instSetConfig.formatDepth(${j})}(void) { EMPTY_BODY(); dive_${instSetConfig.formatDepth(${i})}(); EMPTY_BODY(); }
+#end
+#end

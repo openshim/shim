@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.multicore_association.measure.ui.launchConfigurationType">
+<booleanAttribute key="CMN_IS_AVAILABLE" value="true"/>
+<stringAttribute key="CMN_PROJECT" value="sample_IA32"/>
+<intAttribute key="CMN_SELECT_MODE" value="1"/>
+<stringAttribute key="CYC_COMMAND" value="sh ${project_loc}/data/InstructionCycle/script/measurement.sh ${GenerateCodeDirPath} ${ResultCsvDirPath};"/>
+<stringAttribute key="CYC_CONFDIR_PATH" value="${project_loc}/data/InstructionCycle/conf/"/>
+<stringAttribute key="CYC_DEST_DIR" value="${project_loc}/Measurement/InstructionCycle/Code/"/>
+<booleanAttribute key="CYC_DO_CODE_GEN" value="true"/>
+<booleanAttribute key="CYC_DO_EXEC_MEASURE" value="true"/>
+<stringAttribute key="CYC_INPUT_SHIM" value="${project_loc}/data/jp.co.topscom.Intel_i5_3550.win7_sp1_64.LLVM3_4_CycCoarseMeasure.xml"/>
+<booleanAttribute key="CYC_IS_AVAILABLE" value="true"/>
+<stringAttribute key="CYC_OUTPUT_SHIM" value="${project_loc}/data/instruction_cycle_out_shim.xml"/>
+<stringAttribute key="CYC_RSLT_DIR" value="${project_loc}/Measurement/InstructionCycle/Csv/"/>
+<booleanAttribute key="CYC_USE_DESTDIR_PATH" value="false"/>
+<booleanAttribute key="CYC_USE_RSLTDIR_PATH" value="false"/>
+<booleanAttribute key="CYC_VIEW_RSLT" value="false"/>
+<booleanAttribute key="KEY_CYC_OVERWRITE_RSLT" value="false"/>
+<stringAttribute key="MEM_CODE_FILE" value="${project_loc}/Measurement/sample.c"/>
+<stringAttribute key="MEM_COMMAND" value="echo ${GenerateCodePath}; touch ${ResultFilePath};"/>
+<stringAttribute key="MEM_CONF_FILE" value="${project_loc}/data/config.cfg"/>
+<booleanAttribute key="MEM_DO_CODE_GEN" value="true"/>
+<booleanAttribute key="MEM_DO_EXEC_MEASURE" value="true"/>
+<stringAttribute key="MEM_INPUT_SHIM" value="${project_loc}/data/shim.xml"/>
+<booleanAttribute key="MEM_IS_AVAILABLE" value="false"/>
+<stringAttribute key="MEM_OUTPUT_SHIM" value="${project_loc}/Measurement/shim_output.xml"/>
+<booleanAttribute key="MEM_OVERWRITE_RESULT" value="false"/>
+<stringAttribute key="MEM_RSLT_FILE" value="${project_loc}/Measurement/sample.csv"/>
+<booleanAttribute key="MEM_USE_CODEPATH" value="false"/>
+<booleanAttribute key="MEM_USE_RSLTPATH" value="false"/>
+<booleanAttribute key="MEM_VIEW_RSLT" value="false"/>
+<intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="0"/>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="false"/>
+</launchConfiguration>

@@ -1,0 +1,301 @@
+# ==============================================================================
+# Architecture Configuration for IA-32
+# ==============================================================================
+#
+# Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+#
+# This software is released under the MIT License.
+# http://opensource.org/licenses/mit-license.php
+
+# Intel IA32 system architecture writes peculiar setting in this config file.
+# When there is '#' in a line head, it'll be a comment.
+
+# ------------------------------------------------------------------------------
+# Header Section
+# Explanation:
+#     In this section, header definition of the generated code
+#     is described. Each entry describes a single line, or a description
+#     of the multiple lines is possible by making a deep indentation
+#     than the entry name.
+# ------------------------------------------------------------------------------
+[header]
+
+# include Entry
+#     Describes the header file which does inclusion.
+#     ("#include" themselves do not write)
+#     More than one designation is possible, if you want to specify
+#     more than one, please describe one per line.
+include = \n\
+    <stdio.h>\n\
+    <math.h>
+
+# define Entry
+#     Describes the definition declared in #define.
+#     ("#define" themselves do not write)
+define =\n\
+    UPDATE_VAR(V) do { __asm__ __volatile__ ("#in %0" : "=r" (V) :: "memory"); } while (0)\n\
+    USE_VAR(V)  do { __asm__ __volatile__ ("#out %0" :: "r" (V) : "memory"); } while (0)\n\
+    EMPTY_BODY()  do { __asm__ __volatile__ ("" ::: "memory"); } while (0)\n\
+    INSTR_BODY_0(F)  do { USE_VAR(F); } while (0)\n\
+    INSTR_BODY_1(A,F)  do { UPDATE_VAR(A); USE_VAR(F); } while (0)\n\
+    INSTR_BODY_2(A,B,F)  do { UPDATE_VAR(A); UPDATE_VAR(B); USE_VAR(F); } while (0)\n\
+    INSTR_BODY_3(A,B,C,F)  do { UPDATE_VAR(A); UPDATE_VAR(B); UPDATE_VAR(C); USE_VAR(F); } while (0)\n\
+    INSTR_BODY_4(A,B,C,D,F)  do { UPDATE_VAR(A); UPDATE_VAR(B); UPDATE_VAR(C); UPDATE_VAR(D); USE_VAR(F); } while (0)\n\
+    INSTR_BODY_5(A,B,C,D,E,F)  do { UPDATE_VAR(A); UPDATE_VAR(B); UPDATE_VAR(C); UPDATE_VAR(D); UPDATE_VAR(E); USE_VAR(F); } while (0)\n\
+    NOINLINE  __attribute__((noinline))\n\
+	AGGREGATION_METHOD AGGREGATION_METHOD_B
+
+# global_variable Entry
+#     Declare a global variable
+global_variable = \n\
+    static unsigned long base[TRY], base_ret[TRY];\n\
+    static unsigned int base_cnt, result_cnt;\n\
+    static double buff[3], empty = 0, result[128 * MAX_CONTINUITY][3];\n\
+    static unsigned int eax_start, edx_start, eax_end, edx_end;\n\
+    static volatile unsigned long cnt_call, cnt_ret;
+
+# function Entry
+#     Declare a function. Function to initialize the variable
+#     in the code that generates is declared mainly here.
+function = \n\
+    static void rdtsc_init (void) { } \n\
+    static void rdtsc_start_count (void) { __asm__ volatile ("rdtsc" : "=a" (eax_start), "=d" (edx_start)); } \n\
+    static void rdtsc_stop_count (void) { __asm__ volatile ("rdtsc" : "=a" (eax_end), "=d" (edx_end)); } \n\
+    static unsigned int rdtsc_get_count (void) { \n\
+    	unsigned long clk_start, clk_end; \n\
+    	clk_start = eax_start | ((unsigned long long)edx_start << 32); \n\
+    	clk_end = eax_end | ((unsigned long long)edx_end << 32); \n\
+    	return clk_end - clk_start; \n\
+    }
+
+# ------------------------------------------------------------------------------
+# Main Function Section
+# Explanation:
+#     This section describes the process and the definition
+#     of the main function
+# ------------------------------------------------------------------------------
+[main]
+
+# variable Entry
+#     local variables that are declared in the main function.
+#     By using the register specifier, assigned to the register
+#     as much as possible rather than a memory variable.
+variable = \n\
+    /* arch variable(empty) */
+
+# initialize Entry
+#     Describes the initialization of the local variables and the like.
+initialize = \n\
+    /* arch initialize */\n\
+    rdtsc_init();\n\
+    memset(result, 0x00, sizeof(result));\n\
+    result_cnt = 0;
+
+# measurement code settings
+# Processing for measurement is established here.
+# The setting item for measurement is shared with the following 10 kinds.
+#  * continuity_begin
+#  * try_diff_begin
+#  * measure_diff_begin
+#  * measure_diff_end
+#  * try_diff_end
+#  * try_target_begin
+#  * measure_target_begin
+#  * measure_target_end
+#  * try_target_end
+#  * continuity_end
+# The code set as these setting items is combined with an order list of
+# the following templates and common instruction sets, and is output.
+# ==============================================================================
+# <continuity_begin>
+# continuity_count = <1 .. MAX_CONTINUITY>;
+#
+# <try_diff_begin>
+# for (j = 0; j < TRY; j++) {
+#     <measure_diff_begin>
+#     for (i = 0; i < ITERATION; i++) {
+#         <difference instruction>
+#         (Note: Perform output the number of continuity_count value)
+#     }
+#     <measure_diff_end>
+# }
+# <try_diff_end>
+#
+# <try_target_begin>
+# for (j = 0; j < TRY; j++) {
+#     <measure_diff_begin>
+#     for (i = 0; i < ITERATION; i++) {
+#         <target instruction>
+#         (Note: Perform output the number of continuity_count value)
+#     }
+#     <measure_diff_end>
+# }
+# <try_diff_end>
+#
+# <continuity_end>
+#
+# ...
+# ==============================================================================
+#
+
+continuity_begin = \n\
+	/* arch continuity_begin (empty) */
+
+
+try_diff_begin = \n\
+    /* arch try_diff_begin */\n\
+    base_cnt = 0;\n\
+    memset(base, 0x00, sizeof (base));
+
+
+measure_diff_begin = \n\
+    /* arch measure_diff_begin */\n\
+    rdtsc_start_count();
+
+
+measure_diff_end = \n\
+    /* arch measure_diff_end */\n\
+    rdtsc_stop_count();\n\
+    base[base_cnt++] = rdtsc_get_count();
+
+
+try_diff_end = \n\
+    /* arch try_diff_end */\n\
+    AGGREGATION_METHOD(base ,TRY, ITERATION, buff); \n\
+    empty = buff[1];
+
+
+try_target_begin = \n\
+    /* arch try_target_begin */\n\
+    base_cnt = 0;\n\
+    memset(base, 0x00, sizeof (base));
+
+
+measure_target_begin = \n\
+    /* arch measure_target_begin */\n\
+    rdtsc_start_count();
+
+
+measure_target_end = \n\
+    /* arch measure_target_begin */\n\
+    rdtsc_stop_count(); \n\
+    base[base_cnt++] = rdtsc_get_count();
+
+
+try_target_end = \n\
+    /* arch try_target_end */\n\
+    AGGREGATION_METHOD(base ,TRY, ITERATION, buff);
+
+
+continuity_end = \n\
+    /* arch continuity_end */\n\
+    result[result_cnt][0] = buff[0] - empty; \n\
+    result[result_cnt][1] = buff[1] - empty; \n\
+    result[result_cnt][2] = buff[2] - empty; \n\
+    printf("%s, %.0f, %.0f, %.0f\\n", INSTRUCTION_NAME, \n\
+    \        result[result_cnt][0], result[result_cnt][1], result[result_cnt][2]);\n\
+    result_cnt++;
+
+
+# measure_call_init, measure_ret_init Entry
+#     Describe the initialization process of CALL operation and
+#     RET operation. Operation of these two become a pair,
+#     measurement of a single unit by repeatedly is difficult.
+#     So providing a processing function calls deep in the hierarchy,
+#     By embedding the code measurement, to realize a measurement
+#     at a single CALL/RET operation.
+#
+#  << [try_call_ret_begin]
+#  <forloop begin ("TRY" times)>
+#     +-----------+  << [measure_call_init]
+#     | main_func |  << [measure_ret_init]
+#     +-+---------+  << [measure_call_begin]
+#       |    +-------------+
+# (CALL)+--->| sub_func_01 |
+#            +-+-----------+
+#              |    +-------------+
+#        (CALL)+--->+ sub_func_02 |
+#                   +-+-----------+
+#                     |
+#               (CALL)+---> ...
+#                             |    +-------------+  << [measure_call_end]
+#                       (CALL)+--->| sub_func_xx |
+#                                  +----------+--+  << [measure_ret_begin]
+#                        +---------------+    |
+#                        | sub_func_xx-1 |<---+ (RET)
+#                        +------------+--+
+#                +---------------+    |
+#                | sub_func_xx-2 |<---+ (RET)
+#                +------------+--+
+#                             |
+#                     ... <---+ (RET)
+#     +-----------+    |
+#     | main_func +<---+ (RET)
+#     +-----------+   << [measure_ret_end]
+#                     << [measure_call_result]
+#                     << [measure_ret_result]
+#  <forloop end>
+#  << [try_call_ret_end]
+#
+measure_call_init = \n\
+    cnt_call = 0;
+
+measure_ret_init = \n\
+    cnt_ret = 0;
+
+# measure_call_begin Entry
+#     Describe the process of measurement at the start of
+#     CALL/RET operation.
+measure_call_begin = \n\
+    rdtsc_start_count();
+
+# measure_call_end, measure_ret_begin Entry
+#     Describes the process to be inserted before the RET operation
+#     measurement start and after the end of the measurement CALL
+#     operation. This description is inserted into the deepest part of
+#     the function call hierarchy.
+measure_call_end = \n\
+    rdtsc_stop_count();\n\
+    cnt_call += rdtsc_get_count();
+
+measure_ret_begin = \n\
+    rdtsc_start_count();
+
+# measure_ret_end Entry
+#     Describes the process after the RET operation measurement
+#     has finished.
+measure_ret_end = \n\
+    rdtsc_stop_count();\n\
+    cnt_ret += rdtsc_get_count();
+
+# measure_call_result, measure_ret_result Entry
+#     Describe the process of measurement result output
+#     of CALL operation and RET operation.
+measure_call_result = \n\
+    base[base_cnt] = cnt_call;
+
+measure_ret_result = \n\
+    base_ret[base_cnt] = cnt_ret;\n\
+    base_cnt++;
+
+# try_call_ret_begin, try_call_ret_end Entry
+#     Describe the process of "TRY" entire block of beginning and end
+#     of CALL operation and RET operation.
+try_call_ret_begin = \n\
+    base_cnt = 0;\n\
+    memset(base, 0x00, sizeof (base));\n\
+    memset(base_ret, 0x00, sizeof (base_ret));
+
+try_call_ret_end = \n\
+    AGGREGATION_METHOD(base ,TRY, ITERATION, result[result_cnt]); \n\
+    printf("%s, %.0f, %.0f, %.0f\\n", "call", \n\
+    \        result[result_cnt][0], result[result_cnt][1], result[result_cnt][2]);\n\
+    result_cnt++;\n\
+    AGGREGATION_METHOD(base_ret ,TRY, ITERATION, result[result_cnt]); \n\
+    printf("%s, %.0f, %.0f, %.0f\\n", "ret", \n\
+    \        result[result_cnt][0], result[result_cnt][1], result[result_cnt][2]);\n\
+    result_cnt++;
+
+
+
+

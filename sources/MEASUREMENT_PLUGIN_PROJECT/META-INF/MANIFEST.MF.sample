@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SHIM Performance Measurement Plug-in
+Bundle-SymbolicName: org.multicore_association.measure.core;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.multicore_association.measure.core.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.ui.console,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.core.variables,
+ org.eclipse.jface,
+ org.eclipse.debug.ui,
+ org.eclipse.ui.workbench,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: eSOL Co.,Ltd. and Nagoya University

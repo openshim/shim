@@ -1,0 +1,327 @@
+#*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ *#
+/*
+ * Copyright (c) 2014 eSOL Co.,Ltd. and Nagoya University
+ *
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+
+## MACRO START
+#macro(elementsNumbering $prefix $list)
+#foreach(${val} in ${list})
+\#define ${prefix}__${val.name} ${foreach.index}
+#end
+#end
+#macro(makeConstArray $arrayname, $list)
+static char const *${arrayname}[] = {
+#foreach(${val} in ${list})
+    "${val.name}", /* ${foreach.index} */
+#end
+};
+#end
+#macro(defAccessType $size)
+#if(${size} == 1)
+#set($type = "unsigned char")
+#elseif(${size} == 2)
+#set($type = "unsigned short")
+#elseif(${size} == 4)
+#set($type = "unsigned int")
+#elseif(${size} == 8)
+#set($type = "unsigned long long")
+#else
+#set($type = "void")
+#end
+\#define ACCESS_BYTE_${size} ${type}
+#end
+## MACRO END
+#foreach (${val} in ${confData.mainInclude})
+\#include ${val}
+#end
+
+\#define MEASURE_COUNT ${measureCountMax}
+
+\#define T_LATENCY 0
+\#define T_PITCH   1
+
+\#define P_BEST 0
+\#define P_WORST 1
+\#define P_TYPICAL 2
+
+\#define RW_READ 0
+\#define RW_WRITE 1
+
+typedef struct
+{
+    unsigned char pf;
+} measure_t;
+measure_t measure = {0};
+
+//Memory Space(start address, end address)
+#foreach(${val} in ${subSpaceList})
+\#define ${val.name}_S 0x${val.startHex}
+\#define ${val.name}_E 0x${val.endHex}
+#end
+
+//Address Space Elements
+\#define AS_NUM ${addressSpaceList.size()} //Number of Address Space
+#set($prefix = "AS")
+#elementsNumbering(${prefix},${addressSpaceList})
+#set($arrayname = "address_space_name")
+#makeConstArray(${arrayname},${addressSpaceList})
+
+//Sub Space Elements
+\#define SS_NUM ${subSpaceList.size()} //Number of Sub Space
+#set($prefix = "SS")
+#elementsNumbering(${prefix},${subSpaceList})
+#set($arrayname = "sub_space_name")
+#makeConstArray(${arrayname},${subSpaceList})
+
+//Slave Component Elements
+\#define SC_NUM ${slaveComponentList.size()} //Number of Slave Component
+#set($prefix = "SC")
+#elementsNumbering(${prefix},${slaveComponentList})
+#set($arrayname = "slave_component_name")
+#makeConstArray(${arrayname},${slaveComponentList})
+
+//Master Component Elements
+\#define MC_NUM ${cpuList.size()} //Number of Master Component(only masterType:CPU)
+#set($prefix = "MC")
+#elementsNumbering(${prefix},${cpuList})
+#set($arrayname = "master_component_name")
+#makeConstArray(${arrayname},${cpuList})
+
+
+//Access Type Elements
+\#define AT_NUM ${accessTypeList.size()} //Number of Access Type
+#set($prefix = "AT")
+#elementsNumbering(${prefix},${accessTypeList})
+#set($arrayname = "access_type_name")
+#makeConstArray(${arrayname},${accessTypeList})
+
+#foreach (${val} in ${confData.mainGlobalVariable})
+${val}
+#end
+
+#foreach (${val} in ${confData.mainMacro})
+\#include ${val}
+#end
+
+//Macro for Main function
+#ifndef INIT
+\#define INIT(N) do { ; } while (0)
+#endif
+
+#ifndef UNINIT
+\#define UNINIT() do { ; } while (0)
+#endif
+
+#ifndef RESULT
+\#define RESULT(AS,SS,SC,MC,AT,T,P,CY) do { ; } while (0)
+#endif
+
+#ifndef RUN
+\#define RUN(N) do { ; } while (0)
+#endif
+
+#ifndef RUN_ALL
+\#define RUN_ALL(C) do { ; } while (0)
+#endif
+
+#ifndef DELAY
+\#define DELAY(T) do { ; } while (0)
+#endif
+
+#ifndef SYNC
+\#define SYNC(N) do { ; } while (0)
+#endif
+
+#ifndef SYNC_ALL
+\#define SYNC_ALL(C) do { ; } while (0)
+#endif
+
+#ifndef WAIT_RUN
+\#define WAIT_RUN(N) do { ; } while (0)
+#endif
+
+#ifndef END_RUN
+\#define END_RUN(N) do { ; } while (0)
+#endif
+
+
+#foreach (${val} in ${accessByteSizeList})
+#ifndef ACCESS_BYTE_${val}
+#defAccessType(${val})
+#endif
+
+#ifndef LATENCY${val}_BEST_MEASURE
+\#define LATENCY${val}_BEST_MEASURE(S,E,RW,T,R)  do { ; } while (0)
+#endif
+
+#ifndef LATENCY${val}_WORST_MEASURE
+\#define LATENCY${val}_WORST_MEASURE(S,E,RW,T,R)  do { ; } while (0)
+#endif
+
+#ifndef LATENCY${val}_TYPICAL_MEASURE
+\#define LATENCY${val}_TYPICAL_MEASURE(S,E,RW,T,R)  do { ; } while (0)
+#endif
+
+#ifndef PITCH${val}_BEST_MEASURE
+\#define PITCH${val}_BEST_MEASURE(S,E,RW,T,R)  do { ; } while (0)
+#endif
+
+#ifndef PITCH${val}_WORST_MEASURE
+\#define PITCH${val}_WORST_MEASURE(S,E,RW,T,R)  do { ; } while (0)
+#endif
+
+#ifndef PITCH${val}_TYPICAL_MEASURE
+\#define PITCH${val}_TYPICAL_MEASURE(S,E,RW,T,R)  do { ; } while (0)
+#endif
+
+#end
+
+#foreach (${val} in ${accessByteSizeList})
+/*
+ * Cycle Count of Latency(AccessByteSize:${val})
+ * @param s Start Address
+ * @param s End Address
+ * @param rw Access Type(RW_READ/RW_WRITE)
+ * @param pf Target Perfomance(P_BEST/P_WORST/P_TYPICAL)
+ * @return Latency
+ */
+int latency_count_access${val}(unsigned int s, unsigned int e, unsigned char rw, unsigned char pf)
+{
+  //The following variables are defined automatically.
+  register volatile ACCESS_BYTE_${val} reg = 0;
+  ACCESS_BYTE_${val}* start = (ACCESS_BYTE_${val}*)s;
+  ACCESS_BYTE_${val}* end = (ACCESS_BYTE_${val}*)e;
+  int ret = 0;
+
+  switch(pf)
+  {
+     case P_BEST:
+       LATENCY${val}_BEST_MEASURE(start, end, rw, pf, ret);
+       break;
+     case P_WORST:
+       LATENCY${val}_WORST_MEASURE(start, end, rw, pf, ret);
+       break;
+     case P_TYPICAL:
+       LATENCY${val}_TYPICAL_MEASURE(start, end, rw, pf, ret);
+       break;
+  }
+
+  return ret;
+}
+
+
+/*
+ * Cycle Count of Pitch(AccessByteSize:${val})
+ * @param s Start Address
+ * @param s End Address
+ * @param rw Access Type(RW_READ/RW_WRITE)
+ * @param pf Target Perfomance(P_BEST/P_WORST/P_TYPICAL)
+ * @return Pitch
+ */
+int pitch_count_access${val}(unsigned int s, unsigned int e, unsigned char rw, unsigned char pf)
+{
+  //The following variables are defined automatically.
+  register volatile ACCESS_BYTE_${val} reg = 0;
+  ACCESS_BYTE_${val}* start = (ACCESS_BYTE_${val}*)s;
+  ACCESS_BYTE_${val}* end = (ACCESS_BYTE_${val}*)e;
+  int ret = 0;
+
+  switch(pf)
+  {
+     case P_BEST:
+       PITCH${val}_BEST_MEASURE(start, end, rw, pf, ret);
+       break;
+     case P_WORST:
+       PITCH${val}_WORST_MEASURE(start, end, rw, pf, ret);
+       break;
+     case P_TYPICAL:
+       PITCH${val}_TYPICAL_MEASURE(start, end, rw, pf, ret);
+       break;
+  }
+
+  return ret;
+}
+#end
+
+#foreach (${cpu} in ${cpuList})
+/*
+ * Main of ${cpu.name}
+ */
+#if(${foreach.index} == 0)
+void main_${cpu.name}()
+{
+    int ret=0;
+    unsigned int idx;
+
+    INIT(MC__${cpu.name});
+
+    SYNC_ALL(MC_NUM);
+
+    //Masure Latency and Pitch Best of this Core
+    measure.pf=P_BEST;
+#foreach (${val} in ${cpu.accessPatternList})
+    ret = latency_count_access${val.accessByteSize}(${val.subSpace}_S, ${val.subSpace}_E, ${val.accessRW}, measure.pf);
+    RESULT(AS__${val.addressSpace}, SS__${val.subSpace}, SC__${val.slaveComponent}, MC__${cpu.name}, AT__${val.accessType}, T_LATENCY, measure.pf, ret);
+    ret = pitch_count_access${val.accessByteSize}(${val.subSpace}_S, ${val.subSpace}_E, ${val.accessRW}, measure.pf);
+    RESULT(AS__${val.addressSpace}, SS__${val.subSpace}, SC__${val.slaveComponent}, MC__${cpu.name}, AT__${val.accessType}, T_PITCH, measure.pf, ret);
+#end
+
+    //Masure Latency and Pitch Best of other Cores
+    for(idx=1;idx<MC_NUM;++idx)
+    {
+        RUN(idx);
+        DELAY(10);
+        SYNC(idx);
+    }
+
+    //Measure Latency and Pitch Worst of all Core
+    for(idx=0;idx<2;++idx)
+    {
+        if(idx==0)
+          measure.pf=P_WORST;
+        else
+          measure.pf=P_TYPICAL;
+
+        RUN_ALL(MC_NUM);
+
+#foreach (${val} in ${cpu.accessPatternList})
+        ret = latency_count_access${val.accessByteSize}(${val.subSpace}_S, ${val.subSpace}_E, ${val.accessRW}, measure.pf);
+        RESULT(AS__${val.addressSpace}, SS__${val.subSpace}, SC__${val.slaveComponent}, MC__${cpu.name}, AT__${val.accessType}, T_LATENCY, measure.pf, ret);
+        ret = pitch_count_access${val.accessByteSize}(${val.subSpace}_S, ${val.subSpace}_E, ${val.accessRW}, measure.pf);
+        RESULT(AS__${val.addressSpace}, SS__${val.subSpace}, SC__${val.slaveComponent}, MC__${cpu.name}, AT__${val.accessType}, T_PITCH, measure.pf, ret);
+#end
+        SYNC_ALL(MC_NUM);
+    }
+
+    UNINIT();
+}
+#else
+void main_${cpu.name}()
+{
+    int ret=0;
+
+    INIT(MC__${cpu.name});
+
+    while(1)
+    {
+        WAIT_RUN(MC__${cpu.name});
+
+#foreach (${val} in ${cpu.accessPatternList})
+        ret = latency_count_access${val.accessByteSize}(${val.subSpace}_S, ${val.subSpace}_E, ${val.accessRW}, measure.pf);
+        RESULT(AS__${val.addressSpace}, SS__${val.subSpace}, SC__${val.slaveComponent}, MC__${cpu.name}, AT__${val.accessType}, T_LATENCY, measure.pf, ret);
+        ret = pitch_count_access${val.accessByteSize}(${val.subSpace}_S, ${val.subSpace}_E, ${val.accessRW}, measure.pf);
+        RESULT(AS__${val.addressSpace}, SS__${val.subSpace}, SC__${val.slaveComponent}, MC__${cpu.name}, AT__${val.accessType}, T_PITCH, measure.pf, ret);
+#end
+        END_RUN(MC__${cpu.name});
+    }
+}
+#end
+#end

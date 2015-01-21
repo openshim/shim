@@ -1,0 +1,12 @@
+source.. = src/
+output.. = bin/
+bin.includes = plugin.xml,\
+               META-INF/,\
+               .,\
+               icons/,\
+               lib/MeasurementCycleCodegen.jar,\
+               lib/MeasurementCycleWriteback.jar,\
+               lib/MeasurementMemoryCodegen.jar,\
+               lib/MeasurementMemoryWriteback.jar,\
+               res/
+jars.compile.order = .

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="jar" name="MeasurementCycleCodeGen">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <property name="defaultpackage" value="org.multicore_association.measure.cycle.generate"/>
+    <property name="mainclass" value="CodeGen"/>
+    <property name="encoding" value="UTF-8"/>
+
+    <path id="MeasurementCycleCodeGen.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/commons-cli-1.2.jar"/>
+        <pathelement location="lib/commons-collections-3.2.1.jar"/>
+        <pathelement location="lib/commons-lang-2.6.jar"/>
+        <pathelement location="lib/ini4j-0.5.2.jar"/>
+        <pathelement location="lib/velocity-1.7.jar"/>
+    </path>
+
+    <condition property="noshim">
+        <not><available file="lib/SHIM_API.jar"/></not>
+    </condition>
+
+    <path id="SHIM_API.classpath">
+        <pathelement location="lib/SHIM_API.jar"/>
+    </path>
+
+    <target name="init" if="noshim">
+        <mkdir dir="bin_shim"/>
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac
+                debug="true"
+                debuglevel="${debuglevel}"
+                destdir="bin_shim"
+                includeantruntime="false"
+                encoding="${encoding}">
+            <src path="../SHIM_API_PROJECT/src"/>
+        </javac>
+
+        <jar destfile="lib/SHIM_API.jar">
+            <fileset dir="./bin_shim" />
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="bin"/>
+        <delete dir="bin_shim"/>
+        <delete file="lib/SHIM_API.jar"/>
+        <delete file="MeasurementCycleCodeGen.jar"/>
+    </target>
+
+    <target name="cleanall" depends="clean" />
+
+    <target name="build" depends="build-subprojects,build-project" />
+
+    <target name="build-subprojects"/>
+
+    <target name="build-project" depends="init" >
+        <mkdir dir="bin"/>
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true"
+                debuglevel="${debuglevel}"
+                destdir="bin"
+                includeantruntime="false"
+                encoding="${encoding}">
+            <src path="src"/>
+            <classpath refid="MeasurementCycleCodeGen.classpath"/>
+            <classpath refid="SHIM_API.classpath"/>
+        </javac>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="jar" depends="build" >
+        <jar destfile="MeasurementCycleCodeGen.jar">
+            <fileset dir="./bin" />
+            <zipgroupfileset dir="lib" includes="*.jar" />
+            <manifest>
+                <attribute name="Main-Class" value="${defaultpackage}.${mainclass}" />
+            </manifest>
+        </jar>
+    </target>
+
+</project>

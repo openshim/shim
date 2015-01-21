@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="SHIM Performance Measurement"
+            id="org.multicore_association.measure.core.commands.category.run">
+      </category>
+      <command
+            categoryId="org.multicore_association.measure.core.commands.category.run"
+            id="org.multicore_association.measure.core.commands.run.history"
+            name="Relaunch the previous configuration">
+         <commandParameter
+               id="org.multicore_association.measure.core.commands.run.history.param.memento"
+               name="Memento"
+               optional="false">
+         </commandParameter>
+      </command>
+      <command
+            name="Open Configurations..."
+            categoryId="org.multicore_association.measure.core.commands.category.run"
+            id="org.multicore_association.measure.core.commands.run.config">
+      </command>
+      <command
+            categoryId="org.multicore_association.measure.core.commands.category.run"
+            id="org.multicore_association.measure.core.commands.run.launch"
+            name="Launch">
+         <commandParameter
+               id="org.multicore_association.measure.core.commands.run.launch.param.name"
+               name="Name"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="org.multicore_association.measure.core.commands.run.launch.param.memento"
+               name="Memento"
+               optional="false">
+         </commandParameter>
+         <commandParameter
+               id="org.multicore_association.measure.core.commands.run.launch.param.type"
+               name="Type"
+               optional="false">
+         </commandParameter>
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.multicore_association.measure.core.handlers.HistoryRelaunchCommandHandler"
+            commandId="org.multicore_association.measure.core.commands.run.history">
+      </handler>
+      <handler
+            commandId="org.multicore_association.measure.core.commands.run.config"
+            class="org.multicore_association.measure.core.handlers.OpenConfigCommandHandler">
+      </handler>
+      <handler
+            class="org.multicore_association.measure.core.handlers.LaunchCommandHandler"
+            commandId="org.multicore_association.measure.core.commands.run.launch">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="org.multicore_association.measure.core.toolbars.wizard">
+            <command
+                  commandId="org.multicore_association.measure.core.commands.run.history"
+                  icon="icons/sample.gif"
+                  id="org.multicore_association.measure.core.toolbar.pulldown"
+                  style="pulldown">
+            </command>
+         </toolbar>
+      </menuContribution>
+      <menuContribution
+            locationURI="menu:org.multicore_association.measure.core.toolbar.pulldown">
+         <dynamic
+               class="org.multicore_association.measure.ui.menus.HistoryDynamicMenu"
+               id="org.multicore_association.measure.ui.dynamicmenu.history">
+         </dynamic>
+         <separator
+               name="org.multicore_association.measure.core.toolbar.pulldown.separator1"
+               visible="true">
+         </separator>
+            <menu
+                  id="menu:org.multicore_association.measure.core.toolbar.pulldown.mem"
+                  label="Memory Performance Measurement...">
+               <dynamic
+                     class="org.multicore_association.measure.ui.menus.MemoryPerformanceDynamicMenu"
+                     id="org.multicore_association.measure.ui.dynamicmenu.mempfrm">
+               </dynamic>
+               <separator
+                     name="org.multicore_association.measure.ui.dynamicmenu.mempfrm.sep">
+               </separator>
+            </menu>
+         <menu
+               id="menu:org.multicore_association.measure.core.toolbar.pulldown.cycle"
+               label="Instruction Cycle Extraction...">
+            <dynamic
+                  class="org.multicore_association.measure.ui.menus.InstructionCycleDynamicMenu"
+                  id="org.multicore_association.measure.ui.dynamicmenu.cycle">
+            </dynamic>
+            <separator
+                  name="org.multicore_association.measure.ui.dynamicmenu.cycle.sep">
+            </separator>
+         </menu>
+            <separator
+                  name="org.multicore_association.measure.core.toolbar.pulldown.separator2"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.multicore_association.measure.core.commands.run.config"
+                  style="push">
+            </command>
+      </menuContribution>
+   </extension>
+
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.multicore_association.measure.core.launch.IcmLaunchConfigDelegate"
+            id="org.multicore_association.measure.ui.launchConfigurationType"
+            modes="run, debug"
+            name="SHIM Performance Measurement">
+      </launchConfigurationType>
+   </extension>
+
+
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.multicore_association.measure.ui.launchConfigurationType"
+            icon="icons/sample.gif"
+            id="org.multicore_association.measure.ui.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.multicore_association.measure.ui.launch.IcmLaunchConfigTabGroup"
+            id="org.multicore_association.measure.ui.launchConfigurationTabGroup"
+            type="org.multicore_association.measure.ui.launchConfigurationType">
+         <launchMode
+               mode="run">
+         </launchMode>
+         <launchMode
+               mode="debug">
+         </launchMode>
+      </launchConfigurationTabGroup>
+   </extension>
+</plugin>

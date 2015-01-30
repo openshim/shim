@@ -1,8 +1,7 @@
 SHIM Performance Measurement Plugin
 ================
 
-本ツールは、SHIMのメモリアクセス性能や命令サイクル数といった
-性能情報を測定し、設定する機能を持つ Eclipse Plug-in です。
+This tool is an Eclipse Plugin-in, which is capable of measuring and specifying memory access performance and instruction cycles of SHIM.
 
   1. [Description](#description)
   * [Requirement](#requirement)
@@ -31,48 +30,43 @@ SHIM Performance Measurement Plugin
 1. <a name="description">Description</a>
 ----------------
 
-本ツールでは、入力されたSHIMデータファイルに対し、以下の操作を行います。
+This tool performs the following operations on the input SHIM data files.
 
-  1. MasterComponent(PU)とメモリの組合せ毎にメモリアクセス性能(サイクル数)を
-     計測するためのC言語ソースコード生成機能
-  2. 1.のC言語コードで計測したサイクル数をSHIMへ書き込む機能
-  3. 中間命令(Instruction)毎に命令サイクル数を計測するための
-     C言語ソースコード生成機能
-  4. 3.のC言語コードで計測した命令サイクル数をSHIMへ書き込む機能
+  1. Generating C language source code for measuring the memory access perfromance (in processor cycles) of each MasterComponent(PU)-memroy combination from a specified SHIM XML file
+  2. Writing back the cycles measured with the C language code of 1. to the SHIM XML file
+  3. Generating C language source code for measuring instruction cycles of each instruction of LLVM intermediate representation from a specified SHIM XML file
+  4. Writing the instruction cycles measured with the C language code of 3. to the SHIM XML file
 
 
-ツールではInstructnionCycleやMemoryAccessの性能を
-計測するためのC言語ソースコードを生成します。  
-C言語ソースコードを生成するために必要な、アーキテクチャや実行環境
-固有の設定は個別の設定ファイルに記載されます。  
-設定ファイルはユーザがツール実行前に予め作成しておく必要があります。  
+this tool generates the C language source code to measure the performance of InstructnionCycle or MemoryAccess.  
+In order to generate such C language source code, it is necessary to provide the files in which the specific configuration of architecture or execution environment is stored.  
+Such configuration files need to be created in advance before executing this tool.
 
-C言語ソースコードを使った測定の実行処理はツールでは行いません。  
-測定処理を実行し、計測結果を出力するためには、
-予め測定用スクリプトを作成しておく必要があります。  
+Since this tool just generates the C language source code ,
+it is necessary to prepare the script for the measurement in advance so as to execute the measurement and output the measured result.
 
-計測結果はCSV形式のファイルからSHIMデータファイルへと取り込まれます。  
+The measured result is written from the CSV file to SHIM data file.  
 
 
 2. <a name="requirement">Requirement</a>
 ----------------
-本ツールを利用するためには、以下が正しく設定されている必要があります。
+To take advantage of this tool, the following settings should be conducted correctly.
 
-  - Java SE Development Kit(JDK)
-    * JDK 7 以降のバージョン
+  - Java SE Development Kit (JDK)
+    * JDK 7 or above
     * http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
-インストール後、環境変数に'JAVA_HOME'を追加し、JDKのインストール先のパスを設定してください。
-また、JDKのインストール先の下にあるbinフォルダのパスを環境変数の'PATH'に追加してください。
+After installation, please add 'JAVA_HOME' to Environment Variables, and specify the path to the installed JDK.
+
+In addition, please add the path to the bin folder in the JDK installed folder to 'PATH' in Environment Variables.
 
   - Eclipse
-    * 3.6(Helios) 以降のバージョン
+    * 3.6 (Helios) or above
     * https://eclipse.org/downloads/
 
-Windowsの環境でサンプルを利用する場合、下記の何れかがインストールされ、
-GCCなどの GNU Toolchain が利用可能となっている必要があります。
-インストール後、Windows環境変数の’PATH’に、インストールフォルダの下にある
-binフォルダのパスを追加してください。
+To use the sample in Windows, it is necessary to install either of the following development environment,
+and ensure that GNU Toolchain such as GCC is available.
+After installation, please add the path to the bin folder in the installed folder to 'PATH' in Windows Environment Variables.
 
   - MinGW
     * http://www.mingw.org/
@@ -83,19 +77,18 @@ binフォルダのパスを追加してください。
 ----------------
 
 ### 3.1. <a name="install">Install</a>
-インストールは以下の手順で実施して下さい。
+Please install as the steps below.
 
-  1. 最新版のプラグイン.jarファイルをダウンロード
-  *  Eclipseのpluginディレクトリ(dropins)以下の任意のディレクトリに.jarファイルを格納
-  *  Eclipseを再起動
+  1. Download the latest .jar file of the Plug-in
+  *  Store the .jar file in any directory under the plugin directory (dropins) of Eclipse
+  *  Restart Eclipse
 
-Eclipse再起動後、ツールバーの領域に下記のようなアイコンが表示されます。  
+Upon restarting Eclipse, the following icon will be displayed in the toolbar.  
 
 <img src="images/1.png" width="600">  
 **figure1. IDE after installation**
 
-また "Help->About Eclipse Platform->Installation Details->Plug-ins" に
-インストールしたプラグインの情報が追加されているか確認して下さい。  
+Please confirm the information of the installed plug-in have been added to "Help->About Eclipse Platform->Installation Details->Plug-ins"..  
 
 <img src="images/2.png" width="600">  
 **figure2. Plug-ins Installation Details(1)**
@@ -107,41 +100,35 @@ Eclipse再起動後、ツールバーの領域に下記のようなアイコン�
 **figure2. Plug-ins Installation Details(3)**
 
 ### 3.2. <a name="uninstall">Uninstall</a>
-アンインストールするには、Install時に格納した.jarファイルを削除して下さい。
+To uninstall this tool, simply delete the .jar file stored during the installation.
 
 
 4. <a name="tutorial">Tutorial</a>
 ----------------
 #### 4.1. <a name="procedures">Procedures</a>
-本セクションではSHIM Performance Measurement Plug-in の利用方法について解説します。  
-サンプルプロジェクトを利用し、Windows環境上で性能計測を行ってみましょう。  
-ここでは、2種類あるサンプルプロジェクトのうち、IA32向けサンプルプロジェクト(sample_IA32)を利用します。  
-サンプルプロジェクトの利用手順は以下の通りです。  
+This section describes the usage of SHIM Performance Measurement Plug-in.  
+Please try the performance measurement in Windows environment using a sample project.  
+In this case, we use the sample project for IA32 (sample_IA32) from the two sample projects we have,.
+Following is the usage of the sample project.
 
-  1. サンプルプロジェクトを Import する
-  *  計測方法や集計方法などを変更したい場合など、  
-     必要に応じて各種ファイルを書き換える
-  *  サンプルプロジェクトを選択し、ツールバー上のドロップダウンから  
-     InstructionCycle または MemoryPerformance の計測機能を実行する
-  *  出力結果を確認する
-    - 計測結果を反映したSHIMファイルはデフォルトで data/ 直下に配置されます。
-    - 計測の途中経過である生成コードやCSVファイルは Measurement/ に出力されます。
-  * 必要に応じて 2. ～ 4. の手順を繰り返す
+  1. Import the sample project
+  *  Rewrite the related files on condition that modification of measurement method or aggregation method is necessary
+  *  Select the sample project, and conduct the measurement of InstructionCycle or MemoryPerformance in the drop-down menu on the toolbar
+  *  Confirm the output result
+    - The SHIM file containing the measurement result will be placed under the folder "data/" by default.
+    - The codes and CSV files generated during the measurement will be output to the folder "Measurement/".
+  * Repeat Step 2. ~ 4., if necessary.
 
-サンプルプロジェクトは、SHIM Performance Measurement Plugin を  
-インストールした Eclipse 環境に Import することで使用可能となります。  
-サンプルプロジェクトの詳細については 6.
-[Sample Project Details](#sample-project-details)
-に記載しています。
+The sample project will be available by importing SHIM Performance Measurement Plugin to the installed Eclipse environment.  
+Please refer to 6. [Sample Project Details](#sample-project-details) for details of the sample projects.
 
 #### 4.2. <a name="import-the-sample-project">Import the sample project</a>
-サンプルプロジェクトのインポート手順は以下の通りです。
+Following is how to import the sample project.
 
-1. Eclipse の 'File' メニュー から 'Import' を選択する
-*  'import source' のリストから 'General/Existing Projects into Workspace' を選択する
-*  'Select root directry'(または'Select archive file') の 'Browse' から sample_IA32 の  
-    プロジェクトを含むディレクトリ(またはアーカイブ) を選択する
-*  'Project'：欄で 'sample_IA32/'' にチェックが入っていることを確認し 'Finish' ボタンを押下する
+1. Click 'Import' in 'File' menu of Eclipse
+*  Select 'General/Existing Projects into Workspace' from the list of 'import source'
+*  Locate the directory (or archive file) of sample_IA32 from 'Browse' of 'Select root directory' (or 'Select archive file')
+*  Check 'sample_IA32/' is marked as checked in 'Project' and click 'Finish' button
 
 <img src="images/5.png" width="600">  
 **figure5. Sample Project import procedure(1)**
@@ -153,51 +140,44 @@ Eclipse再起動後、ツールバーの領域に下記のようなアイコン�
 **figure7. Sample Project import procedure(3)**
 
 #### 4.3. <a name="run-the-measurement-process">Run the measurement process</a>
-サンプルプロジェクトのインポート後、そのまま計測処理が実行可能です。  
-計測処理は以下の2種類が実行可能です。  
+Measurement will be executable right after importing the sample project.  
+Followings are the two possible measurement processes.  
 
   - Instruction Cycle
   - Memory Access Performance
 
-これら2種類の計測処理を同時に実行することは出来ません。  
+Besides these two processes cannot be performed at a time.  
 
-計測を実行の手順は以下のとおりです。
+Following is how to execute the measurement.
 
-  1. 計測実行対象となるサンプルプロジェクトを選択する
-  *  ツールバー上のアイコンのドロップダウンを開く
-  *  実行したい機能の実行構成を選択する
-    - メモリアクセス性能計測の場合:  
+  1. Select the target sample project
+  *  Open the dorp-down menu of the icon in toolbar
+  *  Select one of the run configuration for the measurement
+    - To measure memory access performance:
       [Memory Performance Measurement...]>[sample_IA32_MemoryPerform]
-    - 命令サイクル数計測の場合:  
+    - To measure instruction cycles:  
       [Instruction Cycle Extraction...]>[sample_IA32_InstructionCycle]
 
-Tips: ツールバー上のアイコンをクリックするか、ドロップダウンの最上部の
-      メニューを選択すると、直前に実行した実行構成を起動出来ます。
+Tips: The most recently executed run configuration can be started by clicking the icon in toolbar, or selecting the top of the drop-down menu.
 
 <img src="images/8.png" width="600">  
 **figure8. Execution method of Sample Project**
 
-計測処理を実行すると、同梱のサンプルSHIMファイル
-(jp.co.topscom.Intel_i5_3550.win7_sp1_64.LLVM3_4_CycCoarseMeasure.xml)から
-情報を読み出し、計測用のC言語ソースコードを生成します。
-この時、生成されたソースコードは Measurement ディレクトリ以下に
-一時ディレクトリが生成され、そこに保存されます。
+Once the measurement process is executed, the information form the attached sample SHIM file (jp.co.topscom.Intel_i5_3550.win7_sp1_64.LLVM3_4_CycCoarseMeasure.xml) will be extracted, and a C language source code for the measurement will be generated.
+Meanwhile, the generated source code will be stored in a temporary directory generated in the measurement directory.
 
-その後、サンプルに同梱されているシェルスクリプトを利用して
-一時ディレクトリ上で計測用のプログラムがビルドされ、計測処理が行われます。
+Thereafter, the program for measurement will be built in the temporary directory by the shell script attached in the sample and the measurement will be performed.
 
-計測結果は一時ディレクトリにCSVファイルとして出力され、
-そのファイルを使ってSHIMファイルへと書き戻されます。
+The measurement result will be output to a CSV file in the temporary directory, then written back into the SHIM data file using the CSV file.
 
 <img src="images/9.png" width="600">  
 **figure9. The contents of the temporary directory**
 
-サンプルでは、CSVファイルの内容が書き戻されたSHIMファイルを
-プロジェクトのdataディレクトリ以下に以下の名前で出力します。
+In the sample, the SHIM data file with the contents of the CSV file will be output to the data directory of the project with the following names assigned.
 
-  - メモリアクセス性能計測後のSHIMファイル  
+  - SHIM file for memory access performance measurement
     memory_perform_out_shim.xml
-  - 命令サイクル数計測後のSHIMファイル  
+  - SHIM file for instruction cycle measurement
     instruction_cycle_out_shim.xml
 
 <img src="images/10.png" width="600">  
@@ -209,22 +189,18 @@ Tips: ツールバー上のアイコンをクリックするか、ドロップ�
 ### 5.1. <a name="create-the-launch-configuration">Create the launch configuration</a>
 #### 5.1.1 <a name="creation-flow">Creation flow</a>
 
-ツールを実行するためには、予め実行構成ファイル(.launch)を作成する必要があります。
-実行構成ファイルには、実行する機能の種別や、SHIMファイルのパスといった情報が設定されます。  
+In order to execute this tool, it is necessary to create the run configuration files (.launch) in advance.
+In the run configuration file, information such as a type of feature to be executed, and the path of the SHIM data files will be specified.
 
-実行構成ファイルの作成は次の手順で行います。
+Run configuration files can be created by the following steps.
 
-  1. 実行構成の編集対象となるサンプルプロジェクトを選択する(figure11)
-  * ツールバーのアイコンのドロップダウンを開き、
-    "Open Configurations..." メニューを選択する
-  * 実行構成設定画面の "SHIM Performance Measurement" を選択し、
-    新規作成ボタンを押下する (figure12)
-  * ツールの実行に必要な設定を編集し、エラーが出ていないことを確認する
-  * "Apply"ボタンを押下し、編集内容を確定する
+  1. Select the target sample project for the creating run configuration (figure11).
+  * Open the drop-down menu of the icon in toolbar, and select "Open Configurations..." menu.
+  * Select "SHIM Performance Measurement" in the run configuration edit screen, and click 'New' button (figure12).
+  * Ensure whether the necessary settings for executing the tool have been edited, and no error occurs.
+  * Click "Apply" button to confirm the edit.
 
-また、プロジェクト内に実行構成ファイルが存在しない場合、
-ツールバーアイコンのドロップダウンから選択できる'Memory Performance Measurement...'と
-'Instruction Cycle Extraction...'から実行構成ファイルの新規作成メニューが選択出来ます。 (figure13)
+if there is no run configuration file in the project, the new run configuration file can be created by selecting either menu of 'Memory Performance Measurement...' or 'Instruction Cycle Extraction...' in the drop-down menu of toolbar icon.  (figure13)
 
 <img src="images/11.png" width="600">  
 **figure11. Open Configurations Menu**
@@ -237,160 +213,148 @@ Tips: ツールバー上のアイコンをクリックするか、ドロップ�
 
 #### 5.1.2. <a name="common-settings">Common Settings</a>
 
-設定編集画面の各タブに共通して以下の設定が可能です。
+Followings are the common settings in each tab of the configuration edit screen.
 
 ##### Name
-実行構成ファイルの名前を設定します。通常、
-{プロジェクト名}_{選択された機能の種別} の形式で設定されます。
+Specify the name of a run configuration file. Generally,
+it follows the format, {project name}_{type of the selected feature}.
 
 <img src="images/14.png" width="600">  
 **figure14. Selection of individual configuration settings**
 
 #### 5.1.3. <a name="main-tab">Main Tab</a>
 
-Main Tabで設定可能な項目は以下の通りです。
+Followings are the items that can be set in Main Tab.
 
 ##### Project
-設定保存先のプロジェクト名を指定します。指定されたプロジェクトに
-".launch" ファイルや一時ディレクトリが生成されます。
+Specify the name of a project to save the configuration. ".launch" file and a temporary directory will be generated in the specified project.
 
 ##### Process selection
-設定したい機能(Memory Performance Measurement
-または Instruction Cycle Measurement)を選択します。
+Select either of the features to be specified (Memory Performance Measurement or Instruction Cycle Measurement).
 
 <img src="images/15.png" width="600">  
 **figure15. Main Tab**
 
 #### 5.1.4. <a name="memoryperformance-tab">MemoryPerformance Tab</a>
 
-MemoryPerformance Tabで設定可能な項目は以下の通りです。
+Followings are the items which can be set in MemoryPerformance Tab.
 
 ##### Process selection
-実行する機能を選択します。機能はコード生成(Code generation)
-及び計測(Measurement)の2つがあります。
+Select either of the features to be executed. There are two selectable features of Code generation and Measurement.
 
 ##### Input SHIM file
-入力SHIMファイルを指定します。
+Specify the input SHIM file.
 
 ##### Output SHIM file
-出力SHIMファイルを指定します。
+Specify the output SHIM file.
 
-##### Overwrite the results to the input SHIM file
-チェックした合、入力SHIMファイルに結果を上書きします。
+##### Overwrite the input SHIM file with results
+Specify to overwrite the input SHIM file with measurement results, if the checkbox is checked.
 
 ##### View the output SHIM file
-チェックした場合、処理完了後に結果のSHIMファイルをIDEに表示します。
+Specify to display the SHIM file containing measurement results in IDE after the measurement, if the checkbox is checked.
 
-##### Config file
-入力する設定ファルを指定します。
+##### Config. file
+Specify the input configuration file.
 
 ##### Command
-計測実行用のコマンドや、スクリプトを指定します。"${GenerateCodePath}" や
-"${ResultFilePath}" と記載されていた場合、それぞれ生成コードのパスと
-結果格納用CSVファイルのパスが設定されます。
+Specify the command and script to execute measurement.
+The paths of generated code and CSV file to store the result
+are specified using "${GenerateCodePath}" and "${ResultFilePath}", respectively, if necessary.
 
 ##### Measurement code location
-計測コードの出力先を指定します。設定されていない場合、
-プロジェクト内の一時ディレクトリに出力されます。
+Specify the output location of the measurement code.
+If not specified, the code file will be located in a temporary directory in the project.
 
 ##### Result CSV file location
-計測結果CSVファイルを指定します。設定されていない場合、
-プロジェクト内の一時ディレクトリに出力されます。
+Specify the location of the measurement result CSV file.
+If not specified, it will be located in a temporary directory in the project.
 
-計測結果CSVファイルには1行毎に以下の順番でパラメータを記載します。
+In the measurement result CSV file, each parameter is described in one line in the following order.
 
-| 列番 |                 要素 | 説明 |
+| No.|                 Element | Description |
 |------|----------------------|------|
-|    1 | AddressSpace name    | 結果設定対象のAddressSpaceのname属性。 |
-|    2 | SubSpace name        | 結果設定対象のSubSpaceのname属性。 |
-|    3 | SlaveComponent name  | 結果設定対象のMasterSlaveBindingのslaveComponentRef要素から辿った、SlaveComponentのname属性。 |
-|    4 | MasterComponent name | 結果設定対象のAccessorのmasterComponentRef属性から辿った、masterComponentのname属性。 |
-|    5 | Access Type name     | 結果設定対象のPerformanceのaccessTypeRef属性から辿った、AddressSpaceのname属性。 |
-|    6 | Latency (best)       | 設定するLatencyのbest値。 |
-|    7 | Latency (worst)      | 設定するLatencyのworst値。 |
-|    8 | Latency (typical)    | 設定するLatencyのtypical値。 |
-|    9 | Pitch (best)         | 設定するPitchのbest値。 |
-|   10 | Pitch (worst)        | 設定するPitchのworst値。 |
-|   11 | Pitch (typical)      | 設定するPitchのtypical値。 |
+|    1 | AddressSpace name    | name attribute of AddressSpace of the measurement target |
+|    2 | SubSpace name        | name attribute of SubSpace of the measurement target |
+|    3 | SlaveComponent name  | name attribute of SlaveComponent, traced from slaveComponentRef element of MasterSlaveBinding of the measurement target |
+|    4 | MasterComponent name | name attribute of masterComponent, traced from masterComponentRef attribute of Accessor of the measurement target |
+|    5 | Access Type name     | name attribute of AddressSpace, traced from accessTypeRef attribute of Performance of the measurement target |
+|    6 | Latency (best)       | best value of measured Latency |
+|    7 | Latency (worst)      | worst value of measured Latency |
+|    8 | Latency (typical)    | typical value of measured Latency |
+|    9 | Pitch (best)         | best value of measured Pitch |
+|   10 | Pitch (worst)        | worst value of measured Pitch |
+|   11 | Pitch (typical)      | typical value of measured Pitch |
 
 
-列番1～5の項目は、要素を正確に特定するため、SystemConfigurationから辿った経路のname属性を並べ、
-'\_\_'(アンダースコア2つ)で区切って表記する形式で記載する必要があります。
+In oreder to identify the elements correctly, it is necessary to describe the name attributes of the items 1 to 5 traced from SystemConfiguration in the form delimited  by '\_\_' (two underscores).
 
-例: SubSpace name の設定値が ’AS_exclusive_support_global_address_area__SS_CRAM_Bank0_C0’ の場合
+Ex.: set value of SubSpace name is  'AS_exclusive_support_global_address_area__SS_CRAM_Bank0_C0'
 
-上記の例では、'\_\_' で区切ると次のように分割出来ます。
+The above example is separated at the '\_\_' as below.
 
   - AS_exclusive_support_global_address_area
   - SS_CRAM_Bank0_C0
 
-この例で示されるSubSpaceを検索する場合は、まずSystemConfiguration要素から辿れる、
-'AS_exclusive_support_global_address_area' というname属性を持つAddressSpace要素を探索します。
-そして、そのAddressSpace要素から辿れる、'SS_CRAM_Bank0_C0' というname属性を持つSubSpace要素を探索します。
+To search the SubSpace of this exmaple, first, search for
+AddressSpace with the name attribute of 'AS_exclusive_support_global_address_area' by tracing from SystemConfiguration.
+Then, search for the SubSpace with the name attribute of 'SS_CRAM_Bank0_C0' by tracing from that AddressSpace.
 
 <img src="images/16.png" width="600">  
 **figure16. MemoryPerformance Tab**
 
 #### 5.1.5. <a name="instructioncycle-tab">InstructionCycle Tab</a>
 
-InstructionCycle Tabで設定可能な項目は以下の通りです。
+Followings are the items that can be set in InstructionCycle Tab.
 
 ##### Process selection  
-実行する機能を選択します。
-機能はコード生成(Code generation)および計測(Measurement)の2つがあります。
+Specify an executing function.
+There are two functions of Code generation and Measurement.
 
 ##### Input SHIM file
-入力SHIMファイルを指定します。
+Specify the input SHIM file.
 
 ##### Output SHIM file
-出力SHIMファイルを指定します。
+Specify the output SHIM file.
 
-##### Overwrite the results to the input SHIM file
-チェックされた場合、入力SHIMファイルに結果を上書きします。
+##### Overwrite the input SHIM file with measurement results
+Specify to overwrite the input SHIM file with measurement results, if the checkbox is checked.
 
 ##### View the output SHIM file
-チェックした場合、処理完了後に結果のSHIMファイルをIDEに表示します。
+Specify to display the SHIM file containing measurement results in IDE after the measurement, if the checkbox is checked.
 
 ##### Configuration directory
-設定ファイルが格納されたディレクトリを指定します。
+Specify the directory in which configuration files are stored.
 
-このディレクトリには、アーキテクチャ別設定ファイル(.arch)、
-及び共通命令セット別設定ファイル(.inst)が格納されます。
+In this directory, architecture configuration file (.arch) and common instruction set configuration file (.inst) are stored.
 
-アーキテクチャ別設定ファイルのファイル名は、
-SHIMファイルのMasterComponentのarch属性と一致している必要があります。
+The file name of an architecture configuration file is required to be the same as the arch attribute of MasterComponent in the SHIM file, and the file name of a common instruction set configuration file is required to be the same as the name attribute of CommonInstructionSet in the SHIM file, except all the special symbols such as space and hyphen that is required to be replaced by underscores.
 
-また、共通命令セット別設定ファイルのファイル名は、
-SHIMファイルのCommonInstructionSetのname属性と一致している必要があります。  
-この際、スペースやハイフンなどの特殊記号は全てアンダースコアに置き換える必要があります。
-
-|置き換えが必要な記号|
+|Symbols required to be replaced|
 |-------------------|
 |\, /, :, &#8727;, ?, ", <, >, &#124;, -|
 
 
 ##### Command
-計測実行用のコマンドや、スクリプトを指定します。"${GenerateCodeDirPath}" や
-"${ResultCsvDirPath}" と記載されていた場合、それぞれ生成コードのパスと
-結果格納用CSVファイルのパスが設定されます。
+Specify the command and script to execute measurement.
+The the paths of generated code and CSV file to store the result
+are specified using "${GenerateCodePath}" and "${ResultFilePath}", respectively, if necessary.
 
 ##### Generated code destination directory
-計測コードの出力先を指定します。設定されていない場合、
-プロジェクト内の一時ディレクトリに出力されます。
+Specify the destination directory of the measurement code.
+If not specified, the code file will be located in a temporary directory in the project.
 
 ##### Result CSV file location
-計測結果CSVファイルを指定します。設定されていない場合、
-プロジェクト内の一時ディレクトリに出力されます。
+Specify the location of the measurement result CSV file.
+If not specified, it will be located in a temporary directory in the project.
 
 <img src="images/17.png" width="600">  
 **figure17. InstructionCycle Tab**
 
 ### 5.2. <a name="launching-the-created-configuration-file">Launching the created configuration file</a>
 
-作成した実行構成を実行するには、起動対象のプロジェクトを選択した状態で
-一度設定画面を開いてから "Run" ボタンを押します。  
-または、起動対象のプロジェクトを選択した状態で、下図のようにツールバー上の
-ドロップダウンメニューから実行構成を選択することでも実行可能です。  
+To execute the created run configuration,
+open the edit screen again and click "Run" button while the target project is selected, or select the run configuration from the drop-down menu on the toolbar as shown in the following graph while the target project is selected.
 
 <img src="images/18.png" width="600">  
 **figure18. Selection of launch configuration**
@@ -399,112 +363,108 @@ SHIMファイルのCommonInstructionSetのname属性と一致している必要�
 ----------------
 
 ### 6.1. <a name="about-the-sample-project">About the sample project</a>
-本ツールを利用したサンプルプロジェクトとして下記の2種類を用意しています。
+Followings are the two sample projects utilized by this tool.
 
-  - IA32向けサンプルプロジェクト(sample_IA32/, Windows環境用)
-  - 汎用サンプルプロジェクト(sample_generic/)
+  - sample project for IA32 (sample_IA32/, for Windows environment)
+  - generic sample project (sample_generic/)
 
-IA32向けサンプルは MinGWまたはCygwinがインストール・PATH設定が行われ、
-GNU Toolchainが使用可能な環境において実行可能です。
+The sample project for IA32 is executable in the environment in which MinGW or Cygwin is installed, PATHs are set, and GNU Toolchain is available.
 
-汎用サンプルプロジェクトはそのまま実行することは出来ません。
-実行のためには、別途シミュレータや評価ボードを用意し、
-それに合わせてソースコードを修正する必要があります。
+The generic sample project cannot be executed as is.
+Simulator and evaluation board need to be prepared and the source code needs to be modified in accordance with them for the execution.
 
-ここでは、IA32向けWindowsOSを搭載した環境でサンプルプロジェクトを
-使用する手順について解説します。  
-サンプルプロジェクトはGNU Toolchain によるコンパイルを実施します。  
-そのため、Windows上でGNU Toolchain が利用可能なMinGWなどの環境を
-予め用意しておく必要があります。  
+Here are the steps to use the sample project for IA32 in WindowsOS environment.  
+Compile the sample project with GNU Toolchain.  
+It is necessary to prepare an environment like MinGW in which the GNU Toolchain is available in Windows.  
 
 
 ### 6.2. <a name="directory-structure-ia32">Directory structure(IA-32)</a>
-サンプルプロジェクト(sample_IA32/)のディレクトリ構成は以下の通りです。
+Following is the directory structure of the sample project (sample_IA32/).
 
-- **data/**  --------  計測に利用する各種データファイルを格納しています。
-  - **InstructionCycle/**  --------  命令サイクル数計測用のデータを格納しています。
-    - **code/**  --------  ビルド時に必要なソースコードを格納しています。
-      + *sample_IA32_instruction_cycle.c*  --------  命令サイクル数計測用ソースコードです。
-    - **conf/**  --------  コード生成プログラムに入力する設定ファイルを格納しています。
-      + *IA_32.arch*  --------  アーキテクチャ別設定ファイル(IA_32用)
-      + *LLVM_Instructions.inst*  --------  共通命令セット別設定ファイル(LLVM Instructions用)
-    - **script/**  --------  生成コードのビルドや計測を実施するためのスクリプトを格納しています。
-      + *Makefile*  --------  計測用プログラムをビルドするためのMakefileです。
-      + *measurement.sh*  --------  計測処理の実行や結果の整形を行うスクリプトです。
-  - **MemoryPerformance/**  --------  メモリアクセス性能計測用のデータを格納しています。
-    - **code/**  --------  ビルド時に必要なソースコードを格納しています。
-      + *measurement.h* -------- メモリアクセス性能計測処理のサンプルです。
-      + *mem_access.c* -------- メモリアクセス性能計測処理のサンプルです。
-      + *mem_access.h* -------- メモリアクセス性能計測処理のサンプルです。
-      + *mem_asminc.h* -------- メモリアクセス性能計測処理のサンプルです。
-      + *sample_IA32_memory_perform.c*  --------  メモリアクセス性能計測用ソースコードです。
-    - **conf/**  --------  コード生成プログラムに入力する設定ファイルを格納しています。
-      + *generic.cfg*  --------  メモリアクセス性能計測用の一般的な設定ファイルです。
-    - **scrypt/**  --------  生成コードのビルドや計測を実施するためのスクリプトを格納しています。
-      + *Makefile*  --------  計測用プログラムをビルドするためのMakefileです。
-      + *measurement.sh*  --------  計測処理の実行や結果の整形を行うスクリプトです。
+- **data/**  --------  stores various data files used in measurement.
+  - **InstructionCycle/**  --------  stores data for instruction cycle measurement.
+    - **code/**  --------  stores source codes forbuild.
+      + *sample_IA32_instruction_cycle.c*  --------  source code for instruction cycle measurement.
+    - **conf/**  --------  stores input configuration files for code generation.
+      + *IA_32.arch*  --------  architecture configuration file (for IA_32)
+      + *LLVM_Instructions.inst*  --------  common instruction set configuration file (for LLVM Instructions)
+    - **script/**  --------  stores the scripts for code generation and measurement.
+      + *Makefile*  --------  Makefile to build measurement program.
+      + *measurement.sh*  --------  script to execute measurement and to format the result.
+  - **MemoryPerformance/**  --------  stores data for memory access performance measurement.
+    - **code/**  --------  stores source codes for build.
+      + *measurement.h* -------- sample for memory access performance measurement.
+      + *mem_access.c* -------- sample for memory access performance measurement.
+      + *mem_access.h* -------- sample for memory access performance measurement.
+      + *mem_asminc.h* -------- sample for memory access performance measurement.
+      + *sample_IA32_memory_perform.c*  --------  source code for memory access performance measurement.
+    - **conf/**  --------  stores input configuration files for code generation.
+      + *generic.cfg*  --------  generic configuration file for memory access performance measurement.
+    - **script/**  --------  stores the scripts for build and measurement.
+      + *Makefile*  --------  Makefile to build measurement program.
+      + *measurement.sh*  --------  script to execute measurement and to format the results.
   + *jp.co.topscom.Intel_i5_3550.win7_sp1_64.LLVM3_4_CycCoarseMeasure.xml*  
-    --------  サンプル実行用IA32環境向けSHIMファイルです。
-- **Measurement/**  --------  ワークディレクトリです。(初期状態では中身は無し)
-+ *sample_IA32_InstructionCycle.launch*  --------  命令サイクル数計測の実行構成ファイルです。
-+ *sample_IA32_MemoryPerform.launch*  --------  メモリアクセス性能計測の実行構成ファイルです。
+    --------  SHIM file for executing a sample in IA32 environment.
+- **Measurement/**  --------  work directory.(empty in the initial)
++ *sample_IA32_InstructionCycle.launch*  --------  run configuration file of instruction cycle measurement.
++ *sample_IA32_MemoryPerform.launch*  --------  run configuration file of memory access performance measurement.
 
 
 ### 6.3. <a name="directory-structure-generic">Directory structure(Generic)</a>
-サンプルプロジェクト(sample_generic/)のディレクトリ構成は以下の通りです。
+Following is the directory structure of sample project (sample_generic/).
 
-- **data/**  --------  計測に利用する各種データファイルを格納しています。
-  - **InstructionCycle/**  --------  命令サイクル数計測用のデータを格納しています。
-    - **code/**  --------  ビルド時に必要なソースコードを格納しています。
-      + *sample_generic_instruction_cycle.c*  --------  命令サイクル数計測用ソースコードです。
-      + *generic.h* -------- 空のファイルです。
-      + *simulator.h* -------- 空のファイルです。
-      + *sreg.h* -------- 空のファイルです。
-      + *boot.S* -------- 空のファイルです。
-      + *util.S* -------- 空のファイルです。
-    - **conf/**  --------  コード生成プログラムに入力する設定ファイルを格納しています。
-      + *GenericRISC_CPU.arch*  --------  アーキテクチャ別設定ファイル(GenericRISC CPU用)
-      + *LLVM_Instructions.inst*  --------  共通命令セット別設定ファイル(LLVM Instructions用)
-    - **script/**  --------  生成コードのビルドや計測を実施するためのスクリプトを格納しています。
-      + *dummy.csv* -------- CSVへの結果出力例のファイルです。
-      + *gdb.sh* -------- GDB起動用シェルスクリプトのサンプルです。
-      + *gdb-command.x* -------- GDBのコマンドファイルのサンプルです。
-      + *Makefile*  --------  計測用プログラムをビルドするためのMakefileです。
-      + *measurement.sh*  --------  計測処理の実行や結果の整形を行うスクリプトです。
-      + *OpCode.txt* -------- 結果設定対象命令の一覧です。
-      + *run-simurator.sh* -------- シミュレータ起動用スクリプトのサンプルです。
-      + *sample.ld* -------- 空のリンカスクリプトファイルです。
-      + *SimulatorCycleToCsv.py* -------- GDB等より抽出した計測結果データからCSVファイルを作成するスクリプトのサンプルです。
-  - **MemoryPerformance/**  --------  メモリアクセス性能計測用のデータを格納しています。
-    - **code/**  --------  ビルド時に必要なソースコードを格納しています。
-      + *measurement.h* -------- メモリアクセス性能の計測処理のサンプルです。
-      + *mem_access.c* -------- メモリアクセス性能計測処理のサンプルです。
-      + *mem_access.h* -------- メモリアクセス性能計測処理のサンプルです。
-      + *mem_asminc.h* -------- メモリアクセス性能計測処理のサンプルです。
-      + *sample_GenericRISC_CPU_memory_perform.c*  --------  メモリアクセス性能計測用ソースコードです。
-      + *simulator.h* -------- 空のファイルです。
-      + *sreg.h* -------- 空のファイルです。
-      + *boot.S* -------- 空のファイルです。
-      + *util.S* -------- 空のファイルです。
-    - **conf/**  --------  コード生成プログラムに入力する設定ファイルを格納しています。
-      + *generic.cfg*  --------  メモリアクセス性能計測用の一般的な設定ファイルです。
-    - **scrypt/**  --------  生成コードのビルドや計測を実施するためのスクリプトを格納しています。
-      + *dummy.csv* -------- CSVへの結果出力例のファイルです。
-      + *gdb.sh* -------- GDB起動用シェルスクリプトのサンプルです。
-      + *gdb-command.x* -------- GDBのコマンドファイルのサンプルです。
-      + *Makefile* -------- 計測用プログラムをビルドするためのMakefileです。
-      + *measurement.sh* -------- 計測処理の実行や結果の整形を行うスクリプトです。
-      + *run-simurator.sh* -------- シミュレータ起動用スクリプトのサンプルです。
-      + *sample.ld* -------- 空のリンカスクリプトファイルです。
-      + *SimulatorResultToCsv.py* -------- GDB等より抽出した計測結果データからCSVファイルを作成するスクリプトのサンプルです。
+- **data/**  --------  stores various data files used in measurement.
+  - **InstructionCycle/**  --------  stores data for instruction cycle measurement.
+    - **code/**  --------  stores source codes for build.
+      + *sample_generic_instruction_cycle.c*  --------  source code for instruction cycle measurement.
+      + *generic.h* -------- empty file.
+      + *simulator.h* -------- empty file.
+      + *sreg.h* -------- empty file.
+      + *boot.S* -------- empty file.
+      + *util.S* -------- empty file.
+    - **conf/**  --------  stores input configuration files for code generation.
+      + *GenericRISC_CPU.arch*  --------  architecture configuration file (for GenericRISC CPU)
+      + *LLVM_Instructions.inst*  --------  common instruction set configuration file (for LLVM Instructions)
+    - **script/**  --------  stores the scripts for build and measurement.
+      + *dummy.csv* -------- file of result output to CSV.
+      + *gdb.sh* -------- sample of shell script to start GDB.
+      + *gdb-command.x* -------- sample of command file of GDB.
+      + *Makefile*  --------  Makefile to build measurement program.
+      + *measurement.sh*  --------  script to execute measurement and to format the result.
+      + *OpCode.txt* -------- list of result set target instructions.
+      + *run-simurator.sh* -------- sample of script to satrt simulator.
+      + *sample.ld* -------- empty linker script file.
+      + *SimulatorCycleToCsv.py* -------- sample of script to generate CSV file based on measurement result extracted from GDB or Etc.
+  - **MemoryPerformance/**  --------  stores data for memory access performance measurement.
+    - **code/**  --------  stores source codes for build.
+      + *measurement.h* -------- sample for memory access performance measurement.
+      + *mem_access.c* -------- sample for memory access performance measurement.
+      + *mem_access.h* -------- sample for memory access performance measurement.
+      + *mem_asminc.h* -------- sample for memory access performance measurement.
+      + *sample_GenericRISC_CPU_memory_perform.c*  --------  source code for memory access performance measurement.
+      + *simulator.h* -------- empty file.
+      + *sreg.h* -------- empty file.
+      + *boot.S* -------- empty file.
+      + *util.S* -------- empty file.
+    - **conf/**  --------  stores input configuration files for code generation.
+      + *generic.cfg*  --------  generic configuration file for memory access performance measurement.
+    - **script/**  --------  stores the scripts for build and measurement.
+      + *dummy.csv* -------- file of result output to CSV.
+      + *gdb.sh* -------- sample shell script to start GDB.
+      + *gdb-command.x* -------- sample command file of GDB.
+      + *Makefile* -------- Makefile to build measurement program.
+      + *measurement.sh* -------- script to execute measurement and to format the result.
+      + *run-simurator.sh* -------- sample script to start simulator.
+      + *sample.ld* -------- empty linker script file.
+      + *SimulatorResultToCsv.py* -------- sample script to generate CSV file based on measurement result extracted from GDB or Etc.
     + *sample.genericRISC_16core.0_0_0.unknown_Compliler.0_0_0.xml*  
---------  一般的な RISC CPU 16コアの環境について記述されたSHIMファイルのサンプルです。
-- **Measurement/**  --------  ワークディレクトリです。(初期状態では中身は無し)
-+ *sample_generic_InstructionCycle.launch*  --------  命令サイクル数計測の実行構成ファイルです。
-+ *sample_generic_MemoryPerform.launch*  --------  メモリアクセス性能計測の実行構成ファイルです。
+--------  sample SHIM file for generic RISC CPU 16 core environment.
+- **Measurement/**  --------  work directory.(empty in the initial)
++ *sample_generic_InstructionCycle.launch*  --------  run configuration file of instruction cycle measurement.
++ *sample_generic_MemoryPerform.launch*  --------  run configuration file of memory access performance measurement.
 
-サンプルには一部、省略・改変されているものや、中身が空のファイルが存在します。
-これらは、実行環境に合わせ、ツールのユーザ側で編集する必要があります。
+In the samples, there are some empty, incomplete, or modified files.
+It is necessary for tool users to edit them to fit their runtime environments.
 
 7. <a name="copyright">Copyright</a>
 ----------------

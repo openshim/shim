@@ -1,56 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Shim by masakigondo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <title>openshim by openshim</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Shim</h1>
-        <p>SHIM open tools</p>
+    <header>
+      <div class="inner">
+        <h1>openshim</h1>
+        <h2>SHIM open tools</h2>
+        <a href="https://github.com/openshim/shim" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
 
-        <p class="view"><a href="https://github.com/masakigondo/shim">View the Project on GitHub <small>masakigondo/shim</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/masakigondo/shim/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/masakigondo/shim/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/masakigondo/shim">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a id="shim" class="anchor" href="#shim" aria-hidden="true"><span class="octicon octicon-link"></span></a>shim</h1>
 
-<p>shim is a github public repository for the Multicore Association SHIM specification compliant reference open source software. The most central tool is SHIM Editor, a reference implementation of SHIM XML authoring tool. It also hosts sample SHIM XML and CCF XML files, along with the sample application implementation that shows how to use CCF XML files.</p>
+<p>shim is a github public repository for the <a href="http://www.multicore-association.org/workgroup/shim.php">Multicore Association SHIM specification</a> compliant reference open source software. The most central tool is SHIM Editor, a reference implementation of SHIM XML authoring tool. It also hosts sample SHIM XML and CCF XML files, along with the sample application implementation that shows how to use CCF XML files. Another tool is called SHIM Performance Measurement Plugin, which is an Eclipse plugin that can be used to measure the performance of hardware described in SHIM XML. Altogether, SHIM Editor is used for creating a SHIM XML except for the performance values in the XML, which is measured by the SHIM Performance Measurement Plugin that uses the SHIM XML to generate the performance measurement code, and merging the measurement result back to the XML.</p>
 
 <h1>
 <a id="directories" class="anchor" href="#directories" aria-hidden="true"><span class="octicon octicon-link"></span></a>Directories</h1>
 
-<p><a href="https://github.com/masakigondo/shim/tree/master/tools">tools</a> directory includes pre-built executables for forementioned tools. You can just download these and try them. For SHIM Editor, <a href="https://github.com/masakigondo/shim/tree/master/tools/shim-editor/docs">a simple user manual</a> is provided.</p>
+<p><a href="https://github.com/openshim/shim/tree/master/tools">tools</a> directory includes pre-built executables for forementioned tools. You can just download these and try them. For SHIM Editor, <a href="https://github.com/openshim/shim/blob/master/tools/shim-editor/docs/SHIMEditor_UsersManual.md">a simple user manual</a> is provided. For the SHIM Performance Measurement Plugin,  <a href="https://github.com/openshim/shim/tree/master/tools/shim_performance_measurement_plugin/doc">a simillar simple user manual</a> is also provided.</p>
 
-<p><a href="https://github.com/masakigondo/shim/tree/master/samples">samples</a> direcotry includes various SHIM and CCF XML files samples. Please note that these are just samples to provide a feel for how these XML files look like. The accuracy and correctness of the contents are not verified.</p>
+<p><a href="https://github.com/openshim/shim/tree/master/samples">samples</a> direcotry includes various SHIM and CCF XML files samples. Please note that these are just samples to provide a feel for how these XML files look like. The accuracy and correctness of the contents are not verified.</p>
 
-<p><a href="https://github.com/masakigondo/shim/tree/master/schema">schema</a> directory includes the .xsd files of SHIM specification. Note that official schema definition is the one dfined in the SHIM specification document provided from the Multicore Association website.</p>
+<p><a href="https://github.com/openshim/shim/tree/master/schema">schema</a> directory includes the .xsd files of SHIM specification. Note that official schema definition is the one dfined in the SHIM specification document provided from the Multicore Association website.</p>
 
-<p><a href="https://github.com/masakigondo/shim/tree/master/sources">sources</a> directory includes multiple eclipse projects containing forementioned tools soruce codes. Please refer to README.txt files in each subdirectory.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/masakigondo">masakigondo</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+<p><a href="https://github.com/openshim/shim/tree/master/sources">sources</a> directory includes multiple eclipse projects containing forementioned tools soruce codes. Please refer to README.txt files in each subdirectory.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/openshim/shim/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/openshim/shim/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/openshim/shim"></a> is maintained by <a href="https://github.com/openshim">openshim</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-              <script type="text/javascript">
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>

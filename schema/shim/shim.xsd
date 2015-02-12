@@ -378,7 +378,7 @@
 			</xs:enumeration>
 			<xs:enumeration value="CAX">
 				<xs:annotation>
-					<xs:documentation>Comopare and Exchange</xs:documentation>
+					<xs:documentation>Compare and Exchange</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 			<xs:enumeration value="OTHER"/>
